@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        #pokelist > div {
+            @apply border rounded transition-all;
+
+            .img {
+                @apply mb-4 p-1;
+            }
+            .title {
+                @apply uppercase font-bold px-4 pb-1;
+            }
+            .descr {
+                @apply px-4 pb-1;
+            }
+            .bages {
+                @apply flex flex-wrap gap-1.5 mt-1 px-4 pb-4;
+
+                span {
+                    @apply px-3 py-1 text-xs uppercase rounded-full border shadow-sm inline-block;
+                }
+            }
+        }
+        #pokelist > div:hover {
+            @apply shadow-xl cursor-pointer;
+        }
+
+        .type-normal   { background-color: #e7e5e4; border-color: #d6d3d1; } /* stone 200 / 300 */
+        .type-fire     { background-color: #fed7aa; border-color: #fdba74; } /* orange 200 / 300 */
+        .type-water    { background-color: #bfdbfe; border-color: #93c5fd; } /* blue 200 / 300 */
+        .type-grass    { background-color: #a7f3d0; border-color: #6ee7b7; } /* emerald 200 / 300 */
+        .type-electric { background-color: #fde68a; border-color: #fcd34d; } /* amber 200 / 300 */
+        .type-ice      { background-color: #a5f3fc; border-color: #67e8f9; } /* cyan 200 / 300 */
+        .type-fighting { background-color: #fca5a5; border-color: #f87171; } /* red 200 / 300 */
+        .type-poison   { background-color: #e9d5ff; border-color: #d8b4fe; } /* purple 200 / 300 */
+        .type-ground   { background-color: #fde68a; border-color: #fcd34d; } /* amber 200 / 300 (ground) */
+        .type-flying   { background-color: #c7d2fe; border-color: #a5b4fc; } /* indigo 200 / 300 */
+        .type-psychic  { background-color: #fbcfe8; border-color: #f472b6; } /* pink 200 / 300 */
+        .type-bug      { background-color: #d9f99d; border-color: #bef264; } /* lime 200 / 300 */
+        .type-rock     { background-color: #fef08a; border-color: #fde047; } /* yellow 200 / 300 */
+        .type-ghost    { background-color: #ddd6fe; border-color: #c4b5fd; } /* violet 200 / 300 */
+        .type-dragon   { background-color: #c7d2fe; border-color: #a5b4fc; } /* indigo 200 / 300 (dragon) */
+        .type-dark     { background-color: #e4e4e7; border-color: #d4d4d8; } /* zinc 200 / 300 */
+        .type-steel    { background-color: #cbd5e1; border-color: #94a3b8; } /* slate 300 / 400 */
+        .type-fairy    { background-color: #ffe4e6; border-color: #fecdd3; } /* rose 100 / 200 */
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="pokelist" class="container mx-auto my-10 border border-gray-200 rounded grid grid-cols-3 gap-4 p-5 bg-white">
+        <!-- Lazy load -->
+    </div>
+    <div id="scroll-trigger" class="h-4"></div>
+    <pre id="debug"></pre>
+    <script src="lazy-debug.js"></script>    
+</body>
+</html>
