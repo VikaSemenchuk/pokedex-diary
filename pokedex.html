@@ -38,6 +38,9 @@
     </header>
 
     <main>
+      <!-- Sync-Anzeige -->
+      <div></div>
+
       <!-- Seitentitel -->
       <div>
         <div>
@@ -53,78 +56,32 @@
           <div><!-- Icon --></div>
           <div>
             <span></span>
-            <span></span>
+            <span id="stat-caught-count"></span>
           </div>
         </div>
         <div>
           <div><!-- Icon --></div>
           <div>
             <span></span>
-            <span></span>
+            <span id="stat-notes-count"></span>
           </div>
         </div>
       </div>
 
       <!-- Filter-Tabs -->
-      <div>
-        <button></button>
+      <div id="filter-tabs">
+        <button data-filter="all"></button>
+        <button data-filter="notes"></button>
+        <button data-filter="favs"></button>
       </div>
 
-      <!-- Tagebuch-Liste -->
-      <div>
-        <article>
-          <!-- Kopfzeile -->
-          <div>
-            <div>
-              <span><!-- Nummer --></span>
-              <span><!-- Typ-Badges --></span>
-            </div>
-            <button><!-- Favorit --></button>
-          </div>
-
-          <!-- Hauptbereich -->
-          <div>
-            <div>
-              <img src="" alt="" />
-            </div>
-            <div>
-              <h2><!-- Name --></h2>
-              <div><!-- Zeitstempel --></div>
-              <div><!-- Fundort --></div>
-            </div>
-          </div>
-
-          <!-- Statuswerte -->
-          <div></div>
-
-          <!-- Notiz -->
-          <div>
-            <div>
-              <div><!-- Label --></div>
-              <span><!-- Status --></span>
-            </div>
-            <p><!-- gespeicherte Notiz --></p>
-            <textarea rows="3"></textarea>
-            <div>
-              <button></button>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div>
-            <span><!-- Sync-Status --></span>
-            <div>
-              <button><!-- Bearbeiten --></button>
-              <button><!-- Löschen --></button>
-            </div>
-          </div>
-        </article>
-      </div>
+      <!-- Tagebuch-Liste: Karten werden per JS aus localStorage gerendert -->
+      <div id="pokedex-list"></div>
 
       <!-- Toast -->
-      <div>
+      <div id="catch-toast">
         <div>
-          <span></span>
+          <span id="toast-message"></span>
         </div>
       </div>
     </main>
