@@ -1,0 +1,6 @@
+<svg class="icon icon-pokeball-circle w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <circle cx="12" cy="12" r="10" fill="none" stroke="#ffffff" stroke-width="2" />
+  <path d="M 2 12 A 10 10 0 0 1 22 12 Z" fill="#ffffff" />
+  <path d="M 2 12 A 10 10 0 0 0 22 12 Z" fill="none" />
+  <line x1="2" y1="12" x2="22" y2="12" stroke="#ffffff" stroke-width="1.5" />
+</svg>
