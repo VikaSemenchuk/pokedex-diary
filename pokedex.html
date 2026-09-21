@@ -6,11 +6,83 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="pokedex.js"></script>
+
     <link rel="stylesheet" href="./style.css" />
 
     <title>Mein Pokédex - Pokédex Tagebuch</title>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-primary: "Plus Jakarta Sans", system-ui, sans-serif;
+        --font-title: "Space Grotesk", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        --color-bg-main: #faf8ff;
+        --color-bg-card: #ffffff;
+        --color-bg-secondary: #eef2ff;
+
+        --color-accent: #ee3e33;
+        --color-text-accent: #1e293b;
+        --color-text-primary: #5c403c;
+        --color-text-secondary: #ffffff;
+
+        --color-btn-blue: #e0e7ff;
+        --color-btn-yellow: #fef3c7;
+        --color-btn-delete: #fecaca;
+
+        --color-stat-low: #ba1a1a;
+        --color-stat-medium: #f2c000;
+        --color-stat-high: #10b981;
+
+        --color-type-normal: #a8a878;
+        --color-type-fire: #f08030;
+        --color-type-water: #6890f0;
+        --color-type-electric: #f8d030;
+        --color-type-grass: #78c850;
+        --color-type-ice: #98d8d8;
+        --color-type-fighting: #c03028;
+        --color-type-poison: #a040a0;
+        --color-type-ground: #e0c068;
+        --color-type-flying: #a890f0;
+        --color-type-psychic: #f85888;
+        --color-type-bug: #a8b820;
+        --color-type-rock: #b8a038;
+        --color-type-ghost: #705898;
+        --color-type-dragon: #7038f8;
+        --color-type-dark: #705848;
+        --color-type-steel: #b8b8d0;
+        --color-type-fairy: #ee99ac;
+      }
+      @layer base {
+        html {
+          @apply text-xs sm:text-sm lg:text-base leading-relaxed;
+        }
+        body {
+          @apply container mx-auto antialiased font-primary bg-bg-main text-text-primary;
+        }
+        h1 {
+          @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-accent;
+        }
+        h2 {
+          @apply text-lg md:text-xl lg:text-2xl font-bold text-text-accent;
+        }
+        button {
+          @apply text-xs sm:text-sm font-bold tracking-wide py-2.5 px-4 rounded-xl;
+        }
+      }
+      @utility pokemon-number {
+        @apply text-xs sm:text-sm font-mono font-bold;
+      }
+      @utility pokemon-details {
+        @apply text-[11px] sm:text-xs font-bold tracking-wider;
+      }
+    </style>
   </head>
 
   <body>
@@ -89,6 +161,7 @@
         </div>
       </div>
     </main>
+    <script src="pokedex.js" defer></script>
   </body>
   <footer></footer>
 </html>
