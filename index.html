@@ -1,14 +1,121 @@
 <!doctype html>
 <html lang="de">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokédex Tagebuch</title>
-
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Startseite - Pokédex Tagebuch</title>
   </head>
+
   <body>
-    <script src="./main.js"></script>
+    <!-- Header -->
+    <header>
+      <div>
+        <!-- Logo -->
+        <div>
+          <div><!-- Icon --></div>
+          <div>
+            <span><!-- Titel --></span>
+            <div><!-- Status-Badge --></div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+          <a href="index.html"></a>
+          <a href="pokedex.html"></a>
+        </nav>
+
+        <!-- Zähler -->
+        <div><!-- Zähler --></div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Suche -->
+      <section>
+        <form>
+          <input type="text" />
+          <button type="submit"></button>
+        </form>
+      </section>
+
+      <!-- Filter-Chips -->
+      <section>
+        <div>
+          <button></button>
+        </div>
+      </section>
+
+      <!-- Item-Grid -->
+      <section>
+        <article>
+          <!-- Kopfzeile -->
+          <div>
+            <div>
+              <span><!-- Nummer --></span>
+              <h2><!-- Name --></h2>
+              <div><!-- Typ-Badges --></div>
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+          </div>
+
+          <!-- Statuswerte -->
+          <div></div>
+
+          <!-- Aktion -->
+          <div>
+            <button></button>
+          </div>
+        </article>
+      </section>
+
+      <!-- Modal -->
+      <div>
+        <div>
+          <!-- Modal-Kopfzeile -->
+          <div>
+            <div></div>
+            <button></button>
+          </div>
+
+          <!-- Modal-Steckbrief -->
+          <div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <h3></h3>
+              <div></div>
+              <span></span>
+            </div>
+          </div>
+
+          <!-- Modal-Statuswerte -->
+          <div></div>
+
+          <!-- Modal-Aktion -->
+          <div>
+            <button></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div>
+        <span></span>
+      </div>
+    </main>
+    <footer>
+        
+    </footer>
   </body>
 </html>
