@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="./style.css" />
 
+   
     <title>Startseite - Pokédex Tagebuch</title>
     <style type="text/tailwindcss">
       @theme {
@@ -109,82 +110,70 @@
     </header>
 
     <main>
+      <!-- Sync-Anzeige -->
+      <div></div>
+
       <!-- Suche -->
       <section>
-        <form>
-          <input type="text" />
+        <form id="search-form">
+          <input type="text" id="search-input" />
           <button type="submit"></button>
         </form>
       </section>
 
       <!-- Filter-Chips -->
       <section>
-        <div>
-          <button></button>
+        <div id="filter-container">
+          <button data-type="all"></button>
+          <button data-type="Feuer"></button>
+          <button data-type="Wasser"></button>
+          <button data-type="Pflanze"></button>
+          <button data-type="Elektro"></button>
         </div>
       </section>
 
-      <!-- Item-Grid -->
-      <section>
-        <article>
-          <!-- Kopfzeile -->
-          <div>
-            <div>
-              <span><!-- Nummer --></span>
-              <h2><!-- Name --></h2>
-              <div><!-- Typ-Badges --></div>
-            </div>
-            <div>
-              <img src="" alt="" />
-            </div>
-          </div>
-
-          <!-- Statuswerte -->
-          <div></div>
-
-          <!-- Aktion -->
-          <div>
-            <button></button>
-          </div>
-        </article>
-      </section>
+      <!-- Item-Grid: Karten werden per JS aus der API gerendert -->
+      <section id="pokemon-roster"></section>
 
       <!-- Modal -->
-      <div>
+      <div id="search-modal">
         <div>
           <!-- Modal-Kopfzeile -->
           <div>
             <div></div>
-            <button></button>
+            <button id="modal-close-btn"></button>
           </div>
 
           <!-- Modal-Steckbrief -->
           <div>
             <div>
-              <img src="" alt="" />
+              <img id="modal-img" src="" alt="" />
             </div>
             <div>
-              <h3></h3>
-              <div></div>
-              <span></span>
+              <h3 id="modal-name"></h3>
+              <div id="modal-types"></div>
+              <span id="modal-ability"></span>
             </div>
           </div>
 
           <!-- Modal-Statuswerte -->
-          <div></div>
+          <div id="modal-stats"></div>
 
           <!-- Modal-Aktion -->
           <div>
-            <button></button>
+            <button id="modal-catch-btn"></button>
           </div>
         </div>
       </div>
 
       <!-- Toast -->
-      <div>
-        <span></span>
+      <div id="catch-toast">
+        <span id="toast-message"></span>
       </div>
     </main>
-    <footer></footer>
+     <script src="main.js" defer></script>
   </body>
+  <footer>
+    
+  </footer>
 </html>
