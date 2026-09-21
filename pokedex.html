@@ -16,63 +16,67 @@
   <body>
     <!-- Header -->
     <header>
-      <div>
-        <!-- Logo -->
-        <div>
-          <div><!-- Icon --></div>
-          <div>
-            <span><!-- Titel --></span>
-            <div><!-- Status-Badge --></div>
+      <div class="flex items-center gap-3 bg-amber-400">
+        <img src="icons/icon-logo.svg" alt="logo" width="40px" />
+        <div class="flex-1">
+          <div class="flex items-start justify-between">
+            <span>Pokedex Tagebuch</span>
+            <!-- Zähler -->
+            <div>Gefangen: 25</div>
           </div>
         </div>
+      </div>
 
-        <!-- Navigation -->
+      <!-- Navigation -->
+      <div class="flex items-center justify-center">
         <nav>
-          <a href="index.html"></a>
-          <a href="pokedex.html"></a>
+          <a href="index.html"> Startseite</a>
+          <a href="pokedex.html">Mein Pokedex</a>
         </nav>
-
-        <!-- Zähler -->
-        <div><!-- Zähler --></div>
       </div>
     </header>
 
     <main>
-      <!-- Sync-Anzeige -->
-      <div></div>
-
       <!-- Seitentitel -->
       <div>
         <div>
-          <h1></h1>
-          <span></span>
+          <h1>Mein Pokedex-Tagebuch</h1>
+          <span
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
+            iste fugit doloremque suscipit culpa sapiente, nulla odit ullam.
+            Unde, voluptates.</span
+          >
         </div>
         <p></p>
       </div>
 
       <!-- Zusammenfassung -->
-      <div>
-        <div>
-          <div><!-- Icon --></div>
+      <div class="flex items-center gap-3">
+        <div class="flex flex-row gap-3">
           <div>
-            <span></span>
-            <span id="stat-caught-count"></span>
+            <img src="icons/icon-check-circle.svg" alt="" />
+          </div>
+          <div class="flex flex-col gap-3">
+            <span>Gefangene Pokemone</span>
+            <span id="stat-caught-count">3 Einträge</span>
           </div>
         </div>
-        <div>
-          <div><!-- Icon --></div>
+        <div class="flex flex-row gap-4">
           <div>
-            <span></span>
-            <span id="stat-notes-count"></span>
+            <img src="icons/icon-edit-pencil.svg" alt="" />
+          </div>
+          <div class="flex flex-col gap-3">
+            <span>Notizen Erstellt</span>
+            <span id="stat-notes-count">4 Notizen</span>
           </div>
         </div>
       </div>
 
       <!-- Filter-Tabs -->
-      <div id="filter-tabs">
-        <button data-filter="all"></button>
-        <button data-filter="notes"></button>
-        <button data-filter="favs"></button>
+      <div id="filter-tabs" class="flex items-center gap-3 bg-amber-400">
+        <button data-filter="all">Alle geafngen</button>
+        <button data-filter="notes">Mit notizen</button>
+        <button data-filter="favs">Favoriten</button>
       </div>
 
       <!-- Tagebuch-Liste: Karten werden per JS aus localStorage gerendert -->

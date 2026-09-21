@@ -15,36 +15,31 @@
   <body>
     <!-- Header -->
     <header>
-      <div>
-        <!-- Logo -->
-        <div>
-          <div><!-- Icon --></div>
-          <div>
-            <span><!-- Titel --></span>
-            <div><!-- Status-Badge --></div>
+      <div class="flex items-center gap-3 bg-amber-400">
+        <img src="icons/icon-logo.svg" alt="logo" width="40px" />
+        <div class="flex-1">
+          <div class="flex items-start justify-between">
+            <span>Pokedex Tagebuch</span>
+            <!-- Zähler -->
+             <div>Gefangen:  54</div>
           </div>
         </div>
-
-        <!-- Navigation -->
+      </div>
+      <!-- Navigation -->
+      <div class="flex items-center justify-center">
         <nav>
-          <a href="index.html"></a>
-          <a href="pokedex.html"></a>
+          <a href="index.html"> Startseite</a>
+          <a href="pokedex.html">Mein Pokedex</a>
         </nav>
-
-        <!-- Zähler -->
-        <div><!-- Zähler --></div>
       </div>
     </header>
 
     <main>
-      <!-- Sync-Anzeige -->
-      <div></div>
-
       <!-- Suche -->
-      <section>
-        <form id="search-form">
-          <input type="text" id="search-input" />
-          <button type="submit"></button>
+      <section  class="bg-amber-500">
+        <form id="search-form" >
+          <input type="text" id="search-input" placeholder="Gengar" />
+          <button type="submit">Suchen</button>
         </form>
       </section>
 
@@ -99,7 +94,5 @@
       </div>
     </main>
   </body>
-  <footer>
-    
-  </footer>
+  <footer></footer>
 </html>
