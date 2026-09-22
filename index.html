@@ -39,24 +39,24 @@
         --color-stat-medium: #f2c000;
         --color-stat-high: #10b981;
 
-        --color-type-normal: #a8a878;
-        --color-type-fire: #f08030;
-        --color-type-water: #6890f0;
-        --color-type-electric: #f8d030;
-        --color-type-grass: #78c850;
-        --color-type-ice: #98d8d8;
-        --color-type-fighting: #c03028;
-        --color-type-poison: #a040a0;
-        --color-type-ground: #e0c068;
-        --color-type-flying: #a890f0;
-        --color-type-psychic: #f85888;
-        --color-type-bug: #a8b820;
-        --color-type-rock: #b8a038;
-        --color-type-ghost: #705898;
-        --color-type-dragon: #7038f8;
-        --color-type-dark: #705848;
-        --color-type-steel: #b8b8d0;
-        --color-type-fairy: #ee99ac;
+        --color-badge-normal: #a8a878;
+        --color-badge-fire: #f08030;
+        --color-badge-water: #6890f0;
+        --color-badge-electric: #f8d030;
+        --color-badge-grass: #78c850;
+        --color-badge-ice: #98d8d8;
+        --color-badge-fighting: #c03028;
+        --color-badge-poison: #a040a0;
+        --color-badge-ground: #e0c068;
+        --color-badge-flying: #a890f0;
+        --color-badge-psychic: #f85888;
+        --color-badge-bug: #a8b820;
+        --color-badge-rock: #b8a038;
+        --color-badge-ghost: #705898;
+        --color-badge-dragon: #7038f8;
+        --color-badge-dark: #705848;
+        --color-badge-steel: #b8b8d0;
+        --color-badge-fairy: #ee99ac;
       }
       @layer base {
         html {
@@ -72,7 +72,7 @@
           @apply text-lg md:text-xl lg:text-2xl font-bold text-text-accent;
         }
         button {
-          @apply text-xs sm:text-sm font-bold tracking-wide py-2.5 px-4 rounded-xl;
+          @apply text-xs sm:text-sm font-bold tracking-wide py-2.5 px-4 rounded-xl cursor-pointer;
         }
       }
       @utility pokemon-number {
@@ -81,6 +81,81 @@
       @utility pokemon-details {
         @apply text-[11px] sm:text-xs font-bold tracking-wider;
       }
+
+      #pokemon-list > div {
+          @apply rounded bg-white shadow transition-all;
+
+          .params {
+              @apply px-4 mt-4 flex justify-between;
+
+              .id {
+                @apply text-xs rounded-full px-3 py-1 bg-gray-100;
+              }
+          }
+          .img {
+              @apply mb-4 p-1;
+          }
+          .title {
+              @apply text-center text-lg md:text-xl lg:text-2xl font-bold text-text-accent uppercase px-4 pb-1;
+          }
+          .bages {
+              @apply flex flex-wrap gap-1.5 mt-1 px-4 pb-4 justify-center;
+
+              span {
+                  @apply px-3 py-1 text-xs uppercase font-bold rounded-full inline-block;
+              }
+              .badge-normal   { @apply bg-stone-200; }
+              .badge-fire     { @apply bg-orange-200; }
+              .badge-water    { @apply bg-blue-200; }
+              .badge-grass    { @apply bg-emerald-200; }
+              .badge-electric { @apply bg-amber-200; }
+              .badge-ice      { @apply bg-cyan-200; }
+              .badge-fighting { @apply bg-red-200; }
+              .badge-poison   { @apply bg-purple-200; }
+              .badge-ground   { @apply bg-amber-200; }
+              .badge-flying   { @apply bg-indigo-200; }
+              .badge-psychic  { @apply bg-pink-200; }
+              .badge-bug      { @apply bg-lime-200; }
+              .badge-rock     { @apply bg-yellow-200; }
+              .badge-ghost    { @apply bg-violet-200; }
+              .badge-dragon   { @apply bg-indigo-200; }
+              .badge-dark     { @apply bg-zinc-200; }
+              .badge-steel    { @apply bg-slate-200; }
+              .badge-fairy    { @apply bg-rose-100; }
+          }
+          .descr {
+              @apply px-4 mb-2;
+          }
+          .actions {
+            @apply text-center px-4 mb-4;
+
+            button {
+              @apply rounded-full bg-accent text-white;
+            }
+          }
+      }
+      #pokemon-list > div:hover {
+          @apply shadow-xl;
+      }
+      .type-normal   { background: linear-gradient(to bottom left, #e7e5e4, #ffffff 50%); }
+      .type-fire     { background: linear-gradient(to bottom left, #fed7aa, #ffffff 50%); }
+      .type-water    { background: linear-gradient(to bottom left, #bfdbfe, #ffffff 50%); }
+      .type-grass    { background: linear-gradient(to bottom left, #a7f3d0, #ffffff 50%); }
+      .type-electric { background: linear-gradient(to bottom left, #fde68a, #ffffff 50%); }
+      .type-ice      { background: linear-gradient(to bottom left, #a5f3fc, #ffffff 50%); }
+      .type-fighting { background: linear-gradient(to bottom left, #fca5a5, #ffffff 50%); }
+      .type-poison   { background: linear-gradient(to bottom left, #e9d5ff, #ffffff 50%); }
+      .type-ground   { background: linear-gradient(to bottom left, #fde68a, #ffffff 50%); }
+      .type-flying   { background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%); }
+      .type-psychic  { background: linear-gradient(to bottom left, #fbcfe8, #ffffff 50%); }
+      .type-bug      { background: linear-gradient(to bottom left, #d9f99d, #ffffff 50%); }
+      .type-rock     { background: linear-gradient(to bottom left, #fef08a, #ffffff 50%); }
+      .type-ghost    { background: linear-gradient(to bottom left, #ddd6fe, #ffffff 50%); }
+      .type-dragon   { background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%); }
+      .type-dark     { background: linear-gradient(to bottom left, #e4e4e7, #ffffff 50%); }
+      .type-steel    { background: linear-gradient(to bottom left, #cbd5e1, #ffffff 50%); }
+      .type-fairy    { background: linear-gradient(to bottom left, #ffe4e6, #ffffff 50%); }      
+
     </style>
   </head>
 
@@ -256,7 +331,10 @@
       </section>
 
       <!-- Item-Grid: Karten werden per JS aus der API gerendert -->
-      <section id="pokemon-roster"></section>
+      <section id="pokemon-list" class="grid grid-cols-4 gap-4">
+        <!-- Lazy load -->
+      </section>
+      <div id="pokemon-scroll-trigger" class="h-4"></div>
 
       <!-- Modal -->
       <div id="search-modal">
@@ -294,7 +372,7 @@
         <span id="toast-message"></span>
       </div>
     </main>
-    <script src="main.js" defer></script>
+    <script type="module" src="main.js"></script>
   </body>
   <footer></footer>
 </html>
