@@ -15,13 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="./style.css" />
 
-   
     <title>Startseite - Pokédex Tagebuch</title>
     <style type="text/tailwindcss">
       @theme {
-        --font-primary: "Plus Jakarta Sans", system-ui, sans-serif;
-        --font-title: "Space Grotesk", system-ui, sans-serif;
-        --font-mono: "JetBrains Mono", monospace;
+        --font-primary: 'Plus Jakarta Sans', system-ui, sans-serif;
+        --font-title: 'Space Grotesk', system-ui, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
 
         --color-bg-main: #faf8ff;
         --color-bg-card: #ffffff;
@@ -88,42 +87,127 @@
   <body>
     <!-- Header -->
     <header>
-      <div class="flex items-center gap-3 bg-amber-400">
+      <div class="flex items-center gap-3 p-4">
         <img src="icons/icon-logo.svg" alt="logo" width="40px" />
         <div class="flex-1">
           <div class="flex items-start justify-between">
-            <span>Pokedex Tagebuch</span>
-            <!-- Zähler -->
-             <div>Gefangen:  54</div>
+            <h1 class="pt-1.5">Pokedex Tagebuch</h1>
+            <div
+              class="bg-[#FFCB09] p-2 pr-2 pl-2 rounded-3xl flex gap-2"
+            >
+              <div>
+                <img
+                  src="icons/icon-pokedex-journal.svg"
+                  alt=""
+                  class="pt-0.5"
+                  width="15"
+                />
+              </div>
+              <!-- Zähler -->
+              <div class="text-text-accent text-sm">Gefangen: 5</div>
+            </div>
           </div>
         </div>
       </div>
       <!-- Navigation -->
-      <div class="flex items-center justify-center">
-        <nav>
-          <a href="index.html"> Startseite</a>
-          <a href="pokedex.html">Mein Pokedex</a>
+      <div class="flex items-center justify-center p-4">
+        <nav
+          class="flex items-center bg-bg-card rounded-full p-2 shadow-md gap-2"
+        >
+          <a
+            href="index.html"
+            class="flex items-center gap-2 bg-accent text-text-secondary px-6 py-3 rounded-full font-bold transition-all shadow-sm"
+          >
+            <img src="icons/icon-nav-compass.svg" alt="" />
+            Startseite
+          </a>
+          <a
+            href="pokedex.html"
+            class="flex items-center gap-2 text-text-primary px-6 py-3 rounded-full font-bold hover:bg-bg-secondary transition-all"
+          >
+            <img src="icons/icon-pokedex-journal.svg" alt="" />
+            Mein Pokédex
+          </a>
         </nav>
       </div>
     </header>
 
     <main>
       <!-- Suche -->
-      <section  class="bg-amber-500">
-        <form id="search-form" >
-          <input type="text" id="search-input" placeholder="Gengar" />
-          <button type="submit">Suchen</button>
+      <section class="p-4">
+        <form id="search-form">
+          <div
+            class="bg-white rounded-3xl p-2 relative w-full flex items-center"
+          >
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Gengar..."
+              class="w-full bg-transparent px-4 py-1 outline-none border-none focus:ring-0"
+            />
+            <button
+              type="submit"
+              class="bg-accent text-text-secondary absolute right-2 px-10 py-3 rounded-3xl"
+            >
+              Suchen
+            </button>
+          </div>
         </form>
       </section>
 
       <!-- Filter-Chips -->
-      <section>
-        <div id="filter-container">
-          <button data-type="all"></button>
-          <button data-type="Feuer"></button>
-          <button data-type="Wasser"></button>
-          <button data-type="Pflanze"></button>
-          <button data-type="Elektro"></button>
+      <section class="w-full overflow-x-auto py-2 no-scrollbar">
+        <div
+          id="filter-container"
+          class="flex flex-nowrap items-center gap-3 px-4 w-max"
+        >
+          <button
+            data-type="all"
+            class="flex items-center gap-2 bg-accent text-text-secondary px-6 py-2.5 rounded-full font-bold whitespace-nowrap shadow-sm cursor-pointer transition"
+          >
+            Alle
+          </button>
+
+          <button
+            data-type="Feuer"
+            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
+          >
+            <span
+              class="w-3 h-3 rounded-full bg-type-fire pointer-events-none"
+            ></span>
+            Feuer
+          </button>
+
+          <button
+            data-type="Wasser"
+            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
+          >
+            <span
+              class="w-3 h-3 rounded-full bg-type-water pointer-events-none"
+            ></span>
+            Wasser
+          </button>
+
+          <button
+            data-type="Pflanze"
+            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
+          >
+            <span
+              class="w-3 h-3 rounded-full bg-type-grass pointer-events-none"
+            ></span>
+            Pflanze
+          </button>
+
+          <!-- Кнопка «Elektro» -->
+          <button
+            data-type="Elektro"
+            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
+          >
+            <span
+              class="w-3 h-3 rounded-full bg-type-electric pointer-events-none"
+            ></span>
+            Elektro
+          </button>
         </div>
       </section>
 
@@ -166,7 +250,7 @@
         <span id="toast-message"></span>
       </div>
     </main>
-     <script src="main.js" defer></script>
+    <script src="main.js" defer></script>
   </body>
   <footer></footer>
 </html>
