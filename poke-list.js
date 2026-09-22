@@ -1,8 +1,7 @@
-const elContainer = document.querySelector('#pokelist');
-const elDebug = document.querySelector('#debug');
-const scrollTrigger = document.querySelector('#scroll-trigger');
+const elContainer = document.querySelector('#pokemon-list');
+const scrollTrigger = document.querySelector('#pokemon-scroll-trigger');
 
-const limit = 30;
+const limit = 40;
 
 let currentOffset = 0;
 let isLoading = false;
@@ -56,12 +55,12 @@ async function processPokeList(pokeList) {
     for (const pokeItem of pokeList) {
         const pokeData = await pokeLoad(pokeItem.name);
 
-        // const pokeImg             = pokeData.sprites.other.home.front_default;
+        const pokeId              = pokeData.id;
         const pokeImg             = pokeData.sprites.other['official-artwork'].front_default;
         const pokeName            = pokeData.name;
         const pokeBaseExperience  = pokeData.base_experience;
-        const pokeWeight          = pokeData.weight;
-        const pokeHeight          = pokeData.height;
+        const pokeWeight          = pokeData.weight / 10;
+        const pokeHeight          = pokeData.height / 10;
         const primaryType         = pokeData.types.find(t => t.slot === 1).type.name; 
 
         const pokeTypes           = pokeData.types.map(item => item.type.name);
@@ -70,27 +69,17 @@ async function processPokeList(pokeList) {
         const el = document.createElement('div');
         el.classList.add(`type-${primaryType}`);
         el.innerHTML = `
+            <div class="params"><span class="id"># ${pokeId}</span> <span class="fav"><img src="./icons/icon-star-outline.svg" alt=""></span></div>
             <div class="img"><img src="${pokeImg}" alt=""></div>
             <div class="title">${pokeName}</div>
-            <div class="descr">${pokeBaseExperience} xp, ${pokeWeight} kg, ${pokeHeight} m</div>
             <div class="bages">${typesBadges}</div>
+            <div class="descr">${pokeBaseExperience} xp, ${pokeWeight} kg, ${pokeHeight} m</div>
+            <div class="actions"><button>In die Pokebox</button></div>
+
         `;
         elContainer.appendChild(el);
-
-        // elDebug.textContent = JSON.stringify(pokeData, null, 2);
-        // console.log(pokeData.name);
     }
 }
-
-// async function init() {
-//     const pokeList = await pokeListLoad(limit, currentOffset);
-
-//     if (pokeList && pokeList.results) {
-//         processPokeList(pokeList.results);
-//     }
-// };
-
-// init();
 
 async function loadNextBatch() {
     isLoading = true;
