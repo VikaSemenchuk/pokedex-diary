@@ -161,42 +161,55 @@
 
   <body>
     <!-- Header -->
-    <header class="flex flex-col gap-6 mb-8 pt-2">
+     <header class="flex flex-col gap-4 mb-8 pt-2">
       <div
         class="flex flex-col md:flex-row items-center justify-between bg-bg-card p-4 rounded-3xl shadow-sm gap-4"
       >
-        <div class="flex items-center gap-3 w-full md:w-auto">
-          <div
-            class="w-12 h-12 bg-accent rounded-4xl flex items-center justify-center text-text-secondary shadow-sm shrink-0"
-          >
-            <img src="icons/icon-logo.svg" alt="logo" class="w-6 h-6" />
-          </div>
-          <div>
-            <h2 class="font-title text-xl font-bold text-text-accent">
-              Pokédex Tagebuch
-            </h2>
-            <span
-              class="inline-flex items-center gap-1 text-[11px] font-bold text-text-primary bg-bg-secondary px-2.5 py-0.5 rounded-full mt-0.5"
+        <div class="flex items-center justify-between w-full md:w-auto">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 bg-accent rounded-4xl flex items-center justify-center text-text-secondary shadow-sm"
             >
-              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> POKÉAPI
-              LIVE
+              <img src="icons/icon-logo.svg" alt="logo" class="w-6 h-6" />
+            </div>
+            <div>
+              <h2 class="font-title text-xl font-bold text-text-accent">
+                Pokédex Tagebuch
+              </h2>
+              <span
+                class="inline-flex items-center gap-1 text-[11px] font-bold text-text-primary bg-bg-secondary px-2.5 py-0.5 rounded-full mt-0.5"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> POKÉAPI
+                LIVE
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="flex md:hidden items-center gap-2 bg-amber-400 text-text-accent px-3 py-1.5 rounded-2xl font-bold text-sm shadow-sm"
+          >
+            <span>
+              <img src="icons/icon-pokedex-journal.svg" alt="" />
             </span>
+            Gefangen: 6
           </div>
         </div>
 
+        <!-- Navigation -->
         <nav
           class="hidden md:flex items-center bg-bg-secondary/70 p-1.5 rounded-full shadow-inner gap-2"
         >
           <a
             href="index.html"
-            class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2.5 rounded-full font-bold transition-all shadow-sm text-sm"
+            class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2.5 rounded-full font-bold text-sm shadow-sm"
           >
             <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
             Startseite
           </a>
+
           <a
             href="pokedex.html"
-            class="flex items-center gap-2 text-text-primary px-5 py-2.5 rounded-full font-bold hover:bg-bg-card transition-all text-sm"
+            class="flex items-center gap-2 text-text-primary px-5 py-2.5 rounded-full font-bold text-sm hover:bg-bg-secondary"
           >
             <img src="icons/icon-pokedex-journal.svg" alt="" class="w-4 h-4" />
             Mein Pokédex
@@ -210,22 +223,6 @@
             <img src="icons/icon-pokedex-journal.svg" alt="" />
           </span>
           Gefangen: 6
-        </div>
-
-        <div
-          class="flex md:hidden items-center justify-between w-full pt-2 border-t border-bg-secondary"
-        >
-          <span class="text-xs font-bold text-text-primary uppercase"
-            >Übersicht</span
-          >
-          <div
-            class="flex items-center gap-2 bg-amber-400 text-text-accent px-3 py-1.5 rounded-2xl font-bold text-sm shadow-sm"
-          >
-            <span>
-              <img src="icons/icon-pokedex-journal.svg" alt="" />
-            </span>
-            Gefangen: 6
-          </div>
         </div>
       </div>
 

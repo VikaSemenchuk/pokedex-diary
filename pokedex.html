@@ -129,19 +129,7 @@
             href="index.html"
             class="flex items-center gap-2 text-text-primary px-5 py-2 rounded-full font-bold hover:bg-bg-card transition-all text-sm"
           >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="12" cy="12" r="9" stroke="currentColor"></circle>
-              <polygon
-                points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
-                fill="currentColor"
-              ></polygon>
-            </svg>
+            <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
             Startseite
           </a>
 
@@ -149,19 +137,8 @@
             href="pokedex.html"
             class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2 rounded-full font-bold transition-all shadow-sm text-sm"
           >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              ></path>
-            </svg>
+            <img src="icons/icon-pokedex-journal.svg" alt="" class="w-4 h-4" />
+
             Mein Pokédex
           </a>
         </nav>
@@ -176,20 +153,24 @@
         </div>
       </div>
 
-      <div class="flex md:hidden items-center justify-center">
+      <div class="flex md:hidden items-center justify-center p-2">
         <nav
-          class="flex items-center bg-bg-card rounded-full p-2 shadow-sm gap-2 w-full justify-center"
+          class="flex items-center bg-bg-card rounded-full p-2 shadow-md gap-2 w-full justify-center"
         >
           <a
             href="index.html"
-            class="px-4 py-2 rounded-full font-bold text-sm text-text-primary"
-            >Startseite</a
+            class="flex items-center gap-2 text-text-primary  px-5 py-2.5 rounded-full font-bold text-sm shadow-sm"
           >
+            <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
+            Startseite
+          </a>
           <a
             href="pokedex.html"
-            class="bg-accent text-text-secondary px-4 py-2 rounded-full font-bold text-sm shadow-sm"
-            >Mein Pokédex</a
+            class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2.5 rounded-full font-bold text-sm hover:bg-bg-secondary"
           >
+            <img src="icons/icon-pokedex-journal.svg" alt="" class="w-4 h-4" />
+            Mein Pokédex
+          </a>
         </nav>
       </div>
     </header>
