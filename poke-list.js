@@ -1,5 +1,5 @@
-const elContainer = document.querySelector('#pokemon-list');
-const scrollTrigger = document.querySelector('#pokemon-scroll-trigger');
+export const elContainer = document.querySelector('#pokemon-list');
+export const scrollTrigger = document.querySelector('#pokemon-scroll-trigger');
 
 const limit = 40;
 
@@ -7,7 +7,7 @@ let currentOffset = 0;
 let isLoading = false;
 
 
-const observer = new IntersectionObserver(async (entries) => {
+export const observer = new IntersectionObserver(async (entries) => {
         if (entries[0].isIntersecting && !isLoading) {
             await loadNextBatch();
         }
@@ -51,7 +51,7 @@ async function pokeLoad(itemName) {
     }
 }
 
-async function processPokeList(pokeList) {
+export async function processPokeList(pokeList) {
     for (const pokeItem of pokeList) {
         const pokeData = await pokeLoad(pokeItem.name);
 
@@ -68,6 +68,8 @@ async function processPokeList(pokeList) {
 
         const el = document.createElement('div');
         el.classList.add(`type-${primaryType}`);
+        el.dataset.name = pokeName;
+        el.dataset.id = pokeId;
         el.innerHTML = `
             <div class="params"><span class="id"># ${pokeId}</span> <span class="fav"><img src="./icons/icon-star-outline.svg" alt=""></span></div>
             <div class="img"><img src="${pokeImg}" alt=""></div>
@@ -88,13 +90,28 @@ async function loadNextBatch() {
     
     if (pokeList && pokeList.results && pokeList.results.length > 0) {
         console.log('Load next batch: ' + currentOffset + ' - ' + (currentOffset+limit));
-        processPokeList(pokeList.results);
+        await processPokeList(pokeList.results);
         currentOffset += limit;
     } else {
-        observer.unobserve(document.querySelector('#scroll-trigger'));
+        observer.unobserve(scrollTrigger);
     }
     
     isLoading = false;
 }
 
-observer.observe(scrollTrigger);
+export function stopLazyLoad() {
+    observer.unobserve(scrollTrigger);
+}
+
+export function startLazyLoad() {
+    observer.observe(scrollTrigger);
+}
+
+export function resetLazyList() {
+    elContainer.innerHTML = '';
+    currentOffset = 0;
+    startLazyLoad();
+    loadNextBatch();
+}
+
+startLazyLoad();
