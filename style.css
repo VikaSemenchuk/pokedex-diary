@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+
+@keyframes blink-placeholder {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.blinking-placeholder::placeholder {
+    animation: blink-placeholder 1.5s infinite;
+}
