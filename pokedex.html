@@ -19,9 +19,9 @@
     <title>Mein Pokédex - Pokédex Tagebuch</title>
     <style type="text/tailwindcss">
       @theme {
-        --font-primary: 'Plus Jakarta Sans', system-ui, sans-serif;
-        --font-title: 'Space Grotesk', system-ui, sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
+        --font-primary: "Plus Jakarta Sans", system-ui, sans-serif;
+        --font-title: "Space Grotesk", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
 
         --color-bg-main: #faf8ff;
         --color-bg-card: #ffffff;
@@ -81,6 +81,213 @@
       }
       @utility pokemon-details {
         @apply text-[11px] sm:text-xs font-bold tracking-wider;
+      }
+
+    
+      .badges {
+        @apply flex flex-wrap gap-1.5 mt-1 justify-center;
+
+        span {
+          @apply px-3 py-1 text-xs uppercase font-bold rounded-full inline-block;
+        }
+        .badge-normal {
+          @apply bg-stone-200;
+        }
+        .badge-fire {
+          @apply bg-orange-200;
+        }
+        .badge-water {
+          @apply bg-blue-200;
+        }
+        .badge-grass {
+          @apply bg-emerald-200;
+        }
+        .badge-electric {
+          @apply bg-amber-200;
+        }
+        .badge-ice {
+          @apply bg-cyan-200;
+        }
+        .badge-fighting {
+          @apply bg-red-200;
+        }
+        .badge-poison {
+          @apply bg-purple-200;
+        }
+        .badge-ground {
+          @apply bg-amber-200;
+        }
+        .badge-flying {
+          @apply bg-indigo-200;
+        }
+        .badge-psychic {
+          @apply bg-pink-200;
+        }
+        .badge-bug {
+          @apply bg-lime-200;
+        }
+        .badge-rock {
+          @apply bg-yellow-200;
+        }
+        .badge-ghost {
+          @apply bg-violet-200;
+        }
+        .badge-dragon {
+          @apply bg-indigo-200;
+        }
+        .badge-dark {
+          @apply bg-zinc-200;
+        }
+        .badge-steel {
+          @apply bg-slate-200;
+        }
+        .badge-fairy {
+          @apply bg-rose-100;
+        }
+      }
+
+      .type-normal {
+        background: linear-gradient(to bottom left, #e7e5e4, #ffffff 50%);
+      }
+      .type-fire {
+        background: linear-gradient(to bottom left, #fed7aa, #ffffff 50%);
+      }
+      .type-water {
+        background: linear-gradient(to bottom left, #bfdbfe, #ffffff 50%);
+      }
+      .type-grass {
+        background: linear-gradient(to bottom left, #a7f3d0, #ffffff 50%);
+      }
+      .type-electric {
+        background: linear-gradient(to bottom left, #fde68a, #ffffff 50%);
+      }
+      .type-ice {
+        background: linear-gradient(to bottom left, #a5f3fc, #ffffff 50%);
+      }
+      .type-fighting {
+        background: linear-gradient(to bottom left, #fca5a5, #ffffff 50%);
+      }
+      .type-poison {
+        background: linear-gradient(to bottom left, #e9d5ff, #ffffff 50%);
+      }
+      .type-ground {
+        background: linear-gradient(to bottom left, #fde68a, #ffffff 50%);
+      }
+      .type-flying {
+        background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%);
+      }
+      .type-psychic {
+        background: linear-gradient(to bottom left, #fbcfe8, #ffffff 50%);
+      }
+      .type-bug {
+        background: linear-gradient(to bottom left, #d9f99d, #ffffff 50%);
+      }
+      .type-rock {
+        background: linear-gradient(to bottom left, #fef08a, #ffffff 50%);
+      }
+      .type-ghost {
+        background: linear-gradient(to bottom left, #ddd6fe, #ffffff 50%);
+      }
+      .type-dragon {
+        background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%);
+      }
+      .type-dark {
+        background: linear-gradient(to bottom left, #e4e4e7, #ffffff 50%);
+      }
+      .type-steel {
+        background: linear-gradient(to bottom left, #cbd5e1, #ffffff 50%);
+      }
+      .type-fairy {
+        background: linear-gradient(to bottom left, #ffe4e6, #ffffff 50%);
+      }
+
+      .card {
+        @apply flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4
+               w-full max-w-90 md:max-w-xs lg:max-w-72 xl:max-w-80
+               border-2 shadow-lg rounded-2xl;
+      }
+
+      .card .img-wrapper {
+        @apply w-full flex items-center justify-between;
+      }
+      .card .pokemon-number {
+        @apply px-3 py-1 rounded-2xl bg-btn-yellow text-text-accent;
+      }
+      .card .pokemon-favorite {
+        @apply p-2 rounded-full bg-bg-secondary;
+      }
+      .card .pokemon-favorite img {
+        @apply w-4 h-4 sm:w-5 sm:h-5;
+      }
+      .card > img {
+        @apply w-32 sm:w-40 md:w-48 h-auto;
+      }
+      .card .pokemon-name {
+        @apply text-lg sm:text-xl md:text-2xl font-bold text-text-accent;
+      }
+
+     
+      .card .card-stats {
+        @apply flex flex-col w-full gap-2 mt-1;
+      }
+      .card .card-stats .stats-head {
+        @apply flex justify-between items-center;
+      }
+      .card .card-stats .stats-grid {
+        @apply grid grid-cols-2 gap-x-4 gap-y-2;
+      }
+      .card .stat-item {
+        @apply flex flex-col gap-1;
+      }
+      .card .stat-item .stat-label {
+        @apply flex justify-between pokemon-details text-text-accent;
+      }
+      .card .stat-item .stat-track {
+        @apply w-full h-2 rounded-full bg-bg-secondary overflow-hidden;
+      }
+      .card .stat-item .stat-fill {
+        @apply h-full rounded-full;
+      }
+
+    
+      .card .card-comment {
+        @apply flex flex-col w-full gap-1.5 sm:gap-2 border-t pt-3 mt-1;
+      }
+
+    
+      .card .type-chip {
+        @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+               bg-btn-yellow text-text-accent text-xs font-bold uppercase;
+      }
+      .card .type-dot {
+        @apply w-2 h-2 rounded-full;
+      }
+      .card .card-comment label {
+        @apply flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase text-accent;
+      }
+      .card .card-comment label img {
+        @apply w-4 h-4;
+      }
+      .card .card-comment textarea {
+        @apply text-sm w-full rounded-lg bg-bg-secondary/50 border-0 p-3 resize-none
+               italic text-text-primary placeholder:text-text-primary/50;
+      }
+      .card .btn-controllers {
+        @apply flex w-full gap-2;
+      }
+      .card .btn-controllers button {
+        @apply flex-1 flex items-center justify-center gap-1.5
+               text-xs sm:text-sm rounded-xl py-2;
+      }
+      .card .btn-controllers button img {
+        @apply w-3.5 h-3.5 sm:w-4 sm:h-4;
+      }
+      .card .btn-update,
+      .card .btn-save {
+        @apply text-text-primary bg-bg-secondary;
+      }
+      .card .btn-delete {
+        @apply text-accent bg-btn-delete/40;
       }
     </style>
   </head>
@@ -159,7 +366,7 @@
         >
           <a
             href="index.html"
-            class="flex items-center gap-2 text-text-primary  px-5 py-2.5 rounded-full font-bold text-sm shadow-sm"
+            class="flex items-center gap-2 text-text-primary px-5 py-2.5 rounded-full font-bold text-sm shadow-sm"
           >
             <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
             Startseite
@@ -263,8 +470,106 @@
         </button>
       </div>
 
+
+
       <!-- Tagebuch-Liste: Karten werden per JS aus localStorage gerendert -->
-      <div id="pokedex-list"></div>
+      <div
+        id="pokedex-list"
+        class="flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6 px-4"
+      >
+       
+        <!-- <div class="card type-electric">
+          <div class="img-wrapper">
+            <span class="pokemon-number">#025</span>
+            <button class="pokemon-favorite">
+              <img src="./icons/icon-star-outline.svg" alt="" />
+            </button>
+          </div>
+
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+            alt="Pikachu"
+          />
+
+          <h2 class="pokemon-name">Pikachu</h2>
+
+          <span class="type-chip">
+            <span class="type-dot bg-amber-700"></span>
+            Elektro
+          </span>
+
+          <div class="card-stats">
+            <div class="stats-head">
+              <span class="pokemon-details uppercase text-text-accent"
+                >Statuswerte</span
+              >
+              <span class="pokemon-details text-accent">Basis-Index 320</span>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-label"><span>KP</span><span>35</span></div>
+                <div class="stat-track">
+                  <div class="stat-fill bg-stat-low" style="width: 27%"></div>
+                </div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label"><span>ANG</span><span>55</span></div>
+                <div class="stat-track">
+                  <div class="stat-fill bg-stat-medium" style="width: 42%"></div>
+                </div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label"><span>VER</span><span>40</span></div>
+                <div class="stat-track">
+                  <div class="stat-fill bg-stat-low" style="width: 31%"></div>
+                </div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label"><span>INIT</span><span>90</span></div>
+                <div class="stat-track">
+                  <div class="stat-fill bg-stat-medium" style="width: 69%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-comment">
+            <label for="comment-text">
+              <img src="./icons/icon-pokedex-journal.svg" alt="" />
+              Trainer-Tagebuch
+            </label>
+
+            <textarea
+              name="comment-text"
+              id="comment-text"
+              rows="2"
+              placeholder="Hier ein Kommentar schreiben..."
+            ></textarea>
+
+            <div class="btn-controllers">
+              <button type="button" class="btn-update">
+                <img src="./icons/icon-edit-pencil.svg" alt="" />
+                Bearbeiten
+              </button>
+
+              <button type="button" class="btn-delete">
+                <img src="./icons/icon-delete-trash.svg" alt="" />
+                Löschen
+              </button>
+
+              <button type="button" class="btn-save" hidden>
+                <img src="./icons/icon-save-disk.svg" alt="" />
+                Speichern
+              </button>
+            </div>
+          </div>
+        </div> -->
+
+      
 
       <!-- Toast -->
       <div id="catch-toast">
