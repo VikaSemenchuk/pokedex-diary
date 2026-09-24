@@ -6,20 +6,33 @@ import {
 } from './poke-list.js'
 
 const filterContainer = document.querySelector('#type-filter')
-
 let requestId = 0
 
 async function fetchPokemonByType(type) {
-  const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`)
-  if (!res.ok) throw new Error(`Server error: ${res.status}`)
-  const data = await res.json()
-  return data.pokemon.map((entry) => ({ name: entry.pokemon.name }))
+  const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`)
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`)
+  }
+
+  const data = await response.json()
+  return new Set(data.pokemon.map(({ pokemon }) => pokemon.name))
 }
 
-async function applyTypeFilter(filter) {
+async function fetchPokemonDetails(name) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status}`)
+  }
+
+  return response.json()
+}
+
+async function applyTypeFilter(types) {
   const currentRequestId = ++requestId
 
-  if (filter === 'all') {
+  if (types.length === 0) {
     stopLazyLoad()
     resetLazyList()
     return
@@ -29,59 +42,92 @@ async function applyTypeFilter(filter) {
   elContainer.innerHTML = '<p>Lade...</p>'
 
   try {
-    const list = await fetchPokemonByType(filter)
+    const typeSets = await Promise.all(types.map(fetchPokemonByType))
+
+    if (currentRequestId !== requestId) return
+
+    const [firstSet, ...otherSets] = typeSets
+
+    let names = [...firstSet].filter((name) =>
+      otherSets.every((set) => set.has(name)),
+    )
+
+    if (types.length === 1) {
+      const details = await Promise.all(names.map(fetchPokemonDetails))
+
+      if (currentRequestId !== requestId) return
+
+      names = details
+        .filter((pokemon) => pokemon.types.length === 1)
+        .map((pokemon) => pokemon.name)
+    }
 
     if (currentRequestId !== requestId) return
 
     elContainer.innerHTML = ''
 
-    if (list.length === 0) {
+    if (names.length === 0) {
       elContainer.innerHTML = '<p>Keine Pokémon gefunden.</p>'
       return
     }
 
-    await processPokeList(list)
-  } catch (err) {
+    await processPokeList(names.map((name) => ({ name })))
+  } catch (error) {
     if (currentRequestId !== requestId) return
+
     elContainer.innerHTML = '<p>Fehler beim Laden.</p>'
-    console.error(err)
+    console.error(error)
   }
 }
 
-function handleFilterClick(event) {
-  const btn = event.target.closest('button')
-  if (!btn) return
-
-  filterContainer
-    .querySelectorAll('button')
-    .forEach((b) => b.classList.remove('active'))
-  btn.classList.add('active')
-
-  applyTypeFilter(btn.dataset.filter)
+function setButtonActive(button, active) {
+  button.classList.toggle('active', active)
+  button.classList.toggle('bg-accent', active)
+  button.classList.toggle('text-white', active)
+  button.classList.toggle('bg-[#E2E7FF]', !active)
+  button.classList.toggle('text-black', !active)
 }
 
-filterContainer.addEventListener('click', handleFilterClick)
+filterContainer?.addEventListener('click', (event) => {
+  const button = event.target.closest('button')
+  if (!button || !filterContainer.contains(button)) return
 
+  const allButton = filterContainer.querySelector('[data-filter="all"]')
 
+  if (button.dataset.filter === 'all') {
+    filterContainer.querySelectorAll('button').forEach((item) => {
+      setButtonActive(item, item === button)
+    })
 
-const typeFilter = document.querySelector('#type-filter');
+    applyTypeFilter([])
+    return
+  }
 
-if (typeFilter) {
-    typeFilter.addEventListener('click', (event) => {
-        const clickedButton = event.target.closest('button');
-        if (!clickedButton) return;
+  const activeTypes = [
+    ...filterContainer.querySelectorAll('button.active'),
+  ].filter((item) => item.dataset.filter !== 'all')
 
-        const buttons = typeFilter.querySelectorAll('button');
+  const wasActive = button.classList.contains('active')
 
-        buttons.forEach(btn => {
-            btn.classList.remove('bg-accent', 'text-white', 'active');
-            btn.classList.add('bg-[#E2E7FF]', 'text-black');
-        });
+  if (wasActive) {
+    setButtonActive(button, false)
+  } else {
+    if (activeTypes.length >= 2) {
+      activeTypes.forEach((item) => setButtonActive(item, false))
+    }
 
-        clickedButton.classList.remove('bg-[#E2E7FF]','text-black',);
-        clickedButton.classList.add('bg-accent', 'text-white', 'active');
+    setButtonActive(button, true)
+  }
 
-        const selectedType = clickedButton.getAttribute('data-filter');
-        
-    });
-}
+  if (allButton) {
+    setButtonActive(allButton, false)
+  }
+
+  const selectedTypes = [
+    ...filterContainer.querySelectorAll('button.active'),
+  ]
+    .map((item) => item.dataset.filter)
+    .filter((type) => type && type !== 'all')
+
+  applyTypeFilter(selectedTypes)
+})
