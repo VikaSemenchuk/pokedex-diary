@@ -345,61 +345,30 @@
 
       <!-- Filter-Chips -->
       <section class="w-full overflow-x-auto pb-7 pt-2 no-scrollbar">
-        <div
-          id="filter-container"
-          class="flex flex-nowrap items-center gap-3 px-4 w-max"
-        >
-          <button
-            data-type="all"
-            class="flex items-center gap-2 bg-accent text-text-secondary px-6 py-2.5 rounded-full font-bold whitespace-nowrap shadow-sm cursor-pointer transition"
-          >
-            Alle
-          </button>
-
-          <button
-            data-type="Feuer"
-            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
-          >
-            <span
-              class="w-3 h-3 rounded-full bg-type-fire pointer-events-none"
-            ></span>
-            Feuer
-          </button>
-
-          <button
-            data-type="Wasser"
-            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
-          >
-            <span
-              class="w-3 h-3 rounded-full bg-type-water pointer-events-none"
-            ></span>
-            Wasser
-          </button>
-
-          <button
-            data-type="Pflanze"
-            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
-          >
-            <span
-              class="w-3 h-3 rounded-full bg-type-grass pointer-events-none"
-            ></span>
-            Pflanze
-          </button>
-
-          <button
-            data-type="Elektro"
-            class="flex items-center gap-2 bg-bg-secondary text-text-primary px-6 py-2.5 rounded-full font-bold whitespace-nowrap hover:bg-gray-200 cursor-pointer transition"
-          >
-            <span
-              class="w-3 h-3 rounded-full bg-type-electric pointer-events-none"
-            ></span>
-            Elektro
-          </button>
+        <div id="type-filter">
+          <button data-filter="all" class="active">All</button>
+          <button data-filter="normal">Normal</button>
+          <button data-filter="fire">Fire</button>
+          <button data-filter="water">Water</button>
+          <button data-filter="grass">Grass</button>
+          <button data-filter="electric">Electric</button>
+          <button data-filter="ice">Ice</button>
+          <button data-filter="fighting">Fighting</button>
+          <button data-filter="poison">Poison</button>
+          <button data-filter="ground">Ground</button>
+          <button data-filter="flying">Flying</button>
+          <button data-filter="psychic">Psychic</button>
+          <button data-filter="bug">Bug</button>
+          <button data-filter="rock">Rock</button>
+          <button data-filter="ghost">Ghost</button>
+          <button data-filter="dragon">Dragon</button>
+          <button data-filter="dark">Dark</button>
+          <button data-filter="steel">Steel</button>
+          <button data-filter="fairy">Fairy</button>
         </div>
       </section>
 
-      <section id="pokemon-list" class="grid grid-cols-4 gap-4">
-      </section>
+      <section id="pokemon-list" class="grid grid-cols-4 gap-4"></section>
       <div id="pokemon-scroll-trigger" class="h-4"></div>
 
       <div id="search-modal">
