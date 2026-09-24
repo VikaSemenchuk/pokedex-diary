@@ -169,6 +169,9 @@
           button {
             @apply rounded-full bg-accent text-white;
           }
+          button:disabled {
+            @apply rounded-full bg-gray-400 text-white;
+          }
         }
       }
       #pokemon-list > div:hover {
@@ -368,7 +371,7 @@
         </div>
       </section>
 
-      <section id="pokemon-list" class="grid grid-cols-4 gap-4"></section>
+      <section id="pokemon-list" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></section>
       <div id="pokemon-scroll-trigger" class="h-4"></div>
 
       <div id="search-modal">
