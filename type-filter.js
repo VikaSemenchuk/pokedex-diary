@@ -61,3 +61,27 @@ function handleFilterClick(event) {
 }
 
 filterContainer.addEventListener('click', handleFilterClick)
+
+
+
+const typeFilter = document.querySelector('#type-filter');
+
+if (typeFilter) {
+    typeFilter.addEventListener('click', (event) => {
+        const clickedButton = event.target.closest('button');
+        if (!clickedButton) return;
+
+        const buttons = typeFilter.querySelectorAll('button');
+
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-accent', 'text-white', 'active');
+            btn.classList.add('bg-[#E2E7FF]', 'text-black');
+        });
+
+        clickedButton.classList.remove('bg-[#E2E7FF]','text-black',);
+        clickedButton.classList.add('bg-accent', 'text-white', 'active');
+
+        const selectedType = clickedButton.getAttribute('data-filter');
+        
+    });
+}
