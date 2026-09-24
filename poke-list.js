@@ -70,6 +70,7 @@ export async function processPokeList(pokeList) {
         el.classList.add(`type-${primaryType}`);
         el.dataset.name = pokeName;
         el.dataset.id = pokeId;
+        el.dataset.types = pokeTypes.join(' '); 
         el.innerHTML = `
             <div class="params"><span class="id"># ${pokeId}</span> <span class="fav"><img src="./icons/icon-star-outline.svg" alt=""></span></div>
             <div class="img"><img src="${pokeImg}" alt=""></div>
