@@ -130,14 +130,30 @@ function getPokedex() {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 }
 
+// Vika added.  ---------------------------------------------------
+function toStorageRecord(pokeData) {
+  return {
+    id: pokeData.id,
+    name: pokeData.name,
+    sprite: pokeData.sprites.other["official-artwork"].front_default,
+    types: pokeData.types,
+    stats: pokeData.stats,
+  };
+}
+//-----------------------------------------------------------------
+
+
 function savePokemon(pokeData) {
     const pokedex = getPokedex();
-
+    
     if (pokedex.some(pokemon => pokemon.id === pokeData.id)) {
         return false;
     }
-
-    pokedex.push(pokeData);
+    
+    // Vika corrected----------------------------------------------
+    pokedex.push(toStorageRecord(pokeData));
+    // pokedex.push(pokeData);
+    // -------------------------------------------------------------
     localStorage.setItem(STORAGE_KEY, JSON.stringify(pokedex));
 
     return true;
