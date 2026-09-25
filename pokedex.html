@@ -137,14 +137,6 @@
       .type-fairy-gradient {
         background: linear-gradient(to bottom left, #ffe4e6, #ffffff 50%);
       }
-
-      .card .btn-controllers button {
-        @apply flex-1 flex items-center justify-center gap-1.5
-               text-xs sm:text-sm rounded-xl py-2;
-      }
-      .card .btn-controllers button img {
-        @apply w-3.5 h-3.5 sm:w-4 sm:h-4;
-      }
     </style>
   </head>
 
@@ -152,83 +144,49 @@
     <!-- Header -->
     <header class="flex flex-col gap-4 mb-8 pt-2">
       <div
-        class="flex flex-col md:flex-row items-center justify-between bg-bg-card p-4 rounded-3xl shadow-sm gap-4"
+        class="flex flex-wrap items-center justify-between gap-4 bg-bg-card p-4 rounded-3xl shadow-sm"
       >
-        <div class="flex items-center justify-between w-full md:w-auto">
-          <div class="flex items-center gap-3">
-            <img src="icons/icon-logo.svg" alt="logo" class="w-12 h-12" />
-            <div>
-              <h2 class="font-title text-xl font-bold text-text-accent">
-                Pokédex Tagebuch
-              </h2>
-              <span
-                class="inline-flex items-center gap-1 text-[11px] font-bold text-text-primary bg-bg-secondary px-2.5 py-0.5 rounded-full mt-0.5"
-              >
-                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> POKÉAPI
-                LIVE
-              </span>
-            </div>
-          </div>
-
-          <div
-            class="flex md:hidden items-center gap-2 bg-amber-400 text-text-accent px-3 py-1.5 rounded-2xl font-bold text-sm shadow-sm"
-          >
-            <span>
-              <img src="icons/icon-pokedex-journal.svg" alt="" />
+        <div class="flex items-center gap-3">
+          <img src="icons/icon-logo.svg" alt="logo" class="w-12 h-12" />
+          <div>
+            <h2 class="font-title text-xl font-bold text-text-accent">
+              Pokédex Tagebuch
+            </h2>
+            <span
+              class="inline-flex items-center gap-1 text-[11px] font-bold text-text-primary bg-bg-secondary px-2.5 py-0.5 rounded-full mt-0.5"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> POKÉAPI
+              LIVE
             </span>
-            Gefangen: 6
           </div>
         </div>
 
         <!-- Navigation -->
         <nav
-          class="hidden md:flex items-center bg-bg-secondary/70 p-1.5 rounded-full shadow-inner gap-2"
+          class="flex items-center bg-bg-secondary/70 p-1.5 rounded-full shadow-inner gap-2"
         >
           <a
             href="index.html"
-            class="flex items-center gap-2 text-text-primary px-5 py-2 rounded-full font-bold hover:bg-bg-card transition-all text-sm"
+            aria-label="Startseite"
+            title="Startseite"
+            class="flex items-center justify-center gap-2 text-text-primary p-3 md:px-5 md:py-2 rounded-full font-bold hover:bg-bg-card transition-all text-sm"
           >
-            <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
-            Startseite
+            <svg class="w-4 h-4 shrink-0">
+              <use href="./icons/sprite.svg#icon-nav-compass"></use>
+            </svg>
+            <span class="hidden md:inline">Startseite</span>
           </a>
 
           <a
             href="pokedex.html"
-            class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2 rounded-full font-bold transition-all shadow-sm text-sm"
+            aria-label="Mein Pokédex"
+            title="Mein Pokédex"
+            class="flex items-center justify-center gap-2 bg-accent text-text-secondary p-3 md:px-5 md:py-2 rounded-full font-bold transition-all shadow-sm text-sm"
           >
-            <img src="icons/icon-pokedex-journal.svg" alt="" class="w-4 h-4" />
-
-            Mein Pokédex
-          </a>
-        </nav>
-
-        <div
-          class="hidden md:flex items-center gap-2 bg-amber-400 text-text-accent px-4 py-2 rounded-2xl font-bold shadow-sm shrink-0"
-        >
-          <span>
-            <img src="icons/icon-pokedex-journal.svg" alt="" />
-          </span>
-          Gefangen: 6
-        </div>
-      </div>
-
-      <div class="flex md:hidden items-center justify-center p-2">
-        <nav
-          class="flex items-center bg-bg-card rounded-full p-2 shadow-md gap-2 w-full justify-center"
-        >
-          <a
-            href="index.html"
-            class="flex items-center gap-2 text-text-primary px-5 py-2.5 rounded-full font-bold text-sm shadow-sm"
-          >
-            <img src="icons/icon-nav-compass.svg" alt="" class="w-4 h-4" />
-            Startseite
-          </a>
-          <a
-            href="pokedex.html"
-            class="flex items-center gap-2 bg-accent text-text-secondary px-5 py-2.5 rounded-full font-bold text-sm hover:bg-bg-secondary"
-          >
-            <img src="icons/icon-pokedex-journal.svg" alt="" class="w-4 h-4" />
-            Mein Pokédex
+            <svg class="w-4 h-4 shrink-0">
+              <use href="./icons/sprite.svg#icon-pokedex-journal"></use>
+            </svg>
+            <span class="hidden md:inline">Mein Pokédex</span>
           </a>
         </nav>
       </div>
@@ -300,7 +258,7 @@
       <!-- Filter-Tabs -->
       <div
         id="filter-tabs"
-        class="flex items-center bg-bg-card p-2 rounded-full shadow-sm gap-2 max-w-fit overflow-x-auto"
+        class="flex items-center self-center md:self-start bg-bg-card p-2 rounded-full shadow-sm gap-2 max-w-fit overflow-x-auto"
       >
         <button
           data-filter="all"
@@ -327,102 +285,12 @@
         id="pokedex-list"
         class="flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6 px-4"
       >
-        <!-- <div class="card type-electric">
-          <div class="img-wrapper">
-            <span class="pokemon-number">#025</span>
-            <button class="pokemon-favorite">
-              <img src="./icons/icon-star-outline.svg" alt="" />
-            </button>
-          </div>
-
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-            alt="Pikachu"
-          />
-
-          <h2 class="pokemon-name">Pikachu</h2>
-
-          <span class="type-chip">
-            <span class="type-dot bg-amber-700"></span>
-            Elektro
-          </span>
-
-          <div class="card-stats">
-            <div class="stats-head">
-              <span class="pokemon-details uppercase text-text-accent"
-                >Statuswerte</span
-              >
-              <span class="pokemon-details text-accent">Basis-Index 320</span>
-            </div>
-
-            <div class="stats-grid">
-              <div class="stat-item">
-                <div class="stat-label"><span>KP</span><span>35</span></div>
-                <div class="stat-track">
-                  <div class="stat-fill bg-stat-low" style="width: 27%"></div>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label"><span>ANG</span><span>55</span></div>
-                <div class="stat-track">
-                  <div class="stat-fill bg-stat-medium" style="width: 42%"></div>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label"><span>VER</span><span>40</span></div>
-                <div class="stat-track">
-                  <div class="stat-fill bg-stat-low" style="width: 31%"></div>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label"><span>INIT</span><span>90</span></div>
-                <div class="stat-track">
-                  <div class="stat-fill bg-stat-medium" style="width: 69%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-comment">
-            <label for="comment-text">
-              <img src="./icons/icon-pokedex-journal.svg" alt="" />
-              Trainer-Tagebuch
-            </label>
-
-            <textarea
-              name="comment-text"
-              id="comment-text"
-              rows="2"
-              placeholder="Hier ein Kommentar schreiben..."
-            ></textarea>
-
-            <div class="btn-controllers">
-              <button type="button" class="btn-update">
-                <img src="./icons/icon-edit-pencil.svg" alt="" />
-                Bearbeiten
-              </button>
-
-              <button type="button" class="btn-delete">
-                <img src="./icons/icon-delete-trash.svg" alt="" />
-                Löschen
-              </button>
-
-              <button type="button" class="btn-save" hidden>
-                <img src="./icons/icon-save-disk.svg" alt="" />
-                Speichern
-              </button>
-            </div>
-          </div>-->
+        <!-- Card-Temp -->
       </ul>
 
       <!-- Toast -->
       <div id="catch-toast">
-        <div>
-          <span id="toast-message"></span>
-        </div>
+        <span id="toast-message"></span>
       </div>
     </main>
 
@@ -431,7 +299,7 @@
     <!------------ CARD-TEMPLATE ------------->
     <template id="card-template">
       <li
-        class="card flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 w-full max-w-90 md:max-w-xs lg:max-w-72 xl:max-w-80 border-2 shadow-lg rounded-2xl"
+        class="card flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 w-full md:w-xs lg:w-72 xl:w-80 border-0 shadow-lg rounded-2xl"
       >
         <div class="img-wrapper w-full flex items-center justify-between">
           <span
@@ -450,7 +318,7 @@
           </button>
         </div>
 
-        <img class="pokemon-img w-32 sm:w-40 md:w-48 h-auto" alt="" />
+        <img class="pokemon-img  w-60  md:w-full h-auto" alt="" />
 
         <h2
           class="pokemon-name text-lg sm:text-xl md:text-2xl font-bold text-text-accent"
@@ -479,7 +347,7 @@
             </p>
           </div>
 
-          <ul class="stats-grid grid grid-cols-2 gap-x-4 gap-y-2" role="list">
+          <ul class="stats-grid grid grid-cols-2 gap-x-8 gap-y-2" role="list">
             <li class="stat-item flex flex-col gap-1">
               <div
                 class="stat-label flex justify-between pokemon-details text-text-accent"
@@ -498,18 +366,31 @@
         </section>
 
         <form
-          class="card-comment flex flex-col w-full gap-1.5 sm:gap-2 border-t pt-3 mt-1"
+          class="card-comment group flex flex-col w-full gap-1.5 sm:gap-2 border-b-0 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.3)] rounded-2xl p-3 mt-1"
         >
-          <label
-            class="flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase text-accent"
-          >
-            <img
-              class="w-4 h-4"
-              src="./icons/icon-pokedex-journal.svg"
-              alt=""
-            />
-            Trainer-Tagebuch
-          </label>
+          <div class="flex items-center gap-1.5">
+            <label
+              class="flex flex-row items-center gap-2 text-xs sm:text-sm font-bold uppercase text-text-accent"
+            >
+              <svg class="w-4 h-4 shrink-0">
+                <use href="./icons/sprite.svg#icon-trainer-badge"></use>
+              </svg>
+              Trainer-Tagebuch
+            </label>
+
+            <button
+              type="button"
+              class="btn-update ml-auto p-1.5 rounded-full bg-bg-secondary opacity-60 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+              aria-label="Notiz bearbeiten"
+              title="Notiz bearbeiten"
+            >
+              <img
+                class="w-3.5 h-3.5"
+                src="./icons/icon-edit-pencil.svg"
+                alt=""
+              />
+            </button>
+          </div>
 
           <textarea
             class="text-sm w-full rounded-lg bg-bg-secondary/50 border-0 p-3 resize-none italic text-text-primary placeholder:text-text-primary/50"
@@ -519,33 +400,57 @@
             placeholder="Hier ein Kommentar schreiben..."
           ></textarea>
 
-          <div class="btn-controllers flex w-full gap-2">
-            <button
-              type="button"
-              class="btn-update text-text-primary bg-bg-secondary"
-            >
-              <img src="./icons/icon-edit-pencil.svg" alt="" />
-              Bearbeiten
-            </button>
-            <button
-              type="button"
-              class="btn-delete text-accent bg-btn-delete/40"
-            >
-              <img src="./icons/icon-delete-trash.svg" alt="" />
-              Löschen
-            </button>
-            <button
-              type="submit"
-              class="btn-save text-text-primary bg-bg-secondary"
-              hidden
-            >
-              <img src="./icons/icon-save-disk.svg" alt="" />
-              Speichern
-            </button>
-          </div>
+          <button
+            type="submit"
+            class="btn-save w-full flex items-center justify-center gap-1.5 text-text-primary bg-green-200"
+            hidden
+          >
+            <img
+              class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+              src="./icons/icon-save-disk.svg"
+              alt=""
+            />
+            Speichern
+          </button>
         </form>
+
+        <button
+          type="button"
+          class="btn-delete w-full mt-1 justify-center items-center gap-2 md:gap-0.5 flex flex-row text-center text-accent/70 border border-btn-delete bg-transparent hover:bg-btn-delete/30 hover:text-accent focus-visible:bg-btn-delete/30 transition-colors"
+        >
+          <img
+            class="w-4 h-4 sm:w-5 sm:h-5"
+            src="./icons/icon-delete-trash.svg"
+            alt=""
+          />
+          Pokémon aus dem Pokédex löschen
+        </button>
       </li>
     </template>
+
+    <!-- Oben-button -->
+    <button
+      id="backToTopBtn"
+      aria-label="Oben"
+      class="fixed right-6 z-50 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-amber-300 text-white shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4 pointer-events-none hover:bg-amber-400 active:scale-95 focus:outline-none"
+      style="bottom: max(1.5rem, env(safe-area-inset-bottom))"
+    >
+      <svg
+        class="h-6 w-6 sm:h-7 sm:w-7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 15l7-7 7 7"
+        ></path>
+      </svg>
+    </button>
+
     <script type="module" src="pokedex.js"></script>
   </body>
 </html>
