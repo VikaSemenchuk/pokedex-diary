@@ -1,5 +1,11 @@
 // ADD TRANSLATE FOR TYPES!!!!!
-import  "./back-to-top.js";
+import "./back-to-top.js";
+import {
+  isFavorite,
+  toggleFavorite,
+  setStarIcon,
+  updateCatchCounter,
+} from "./card-functions.js";
 
 const myPokemonsList = document.getElementById("pokedex-list");
 const template = document.querySelector("#card-template");
@@ -60,12 +66,15 @@ function updateCounters() {
       notesCount === 1 ? "Notiz" : "Notizen"
     }`;
   }
+
+ 
+  updateCatchCounter();
 }
 
 function applyFilter() {
   const cards = myPokemonsList.querySelectorAll(".card");
-    let visibleCount = 0;
-    
+  let visibleCount = 0;
+
   cards.forEach((card) => {
     let visible = true;
 
@@ -75,10 +84,10 @@ function applyFilter() {
       visible = card.dataset.favorite === "true";
     }
 
-      card.hidden = !visible;
-        if (visible) visibleCount += 1;
+    card.hidden = !visible;
+    if (visible) visibleCount += 1;
   });
-      updateEmptyState(visibleCount);
+  updateEmptyState(visibleCount);
 }
 
 const ACTIVE_TAB_CLASSES = ["bg-accent", "text-text-secondary", "shadow-sm"];
@@ -115,17 +124,12 @@ function setupCardControls(card, pokemon) {
   const textarea = form.querySelector('textarea[name="comment"]');
 
   favoriteBtn.addEventListener("click", () => {
-    pokemon.favorite = !pokemon.favorite;
+    const isFav = toggleFavorite(pokemon.id);
 
-    favoriteBtn.setAttribute("aria-pressed", String(pokemon.favorite));
-    card.dataset.favorite = String(pokemon.favorite);
+    favoriteBtn.setAttribute("aria-pressed", String(isFav));
+    card.dataset.favorite = String(isFav);
+    setStarIcon(favoriteBtn.querySelector("img"), isFav);
 
-    const icon = favoriteBtn.querySelector("img");
-    icon.src = pokemon.favorite
-      ? "./icons/icon-star-filled.svg"
-      : "./icons/icon-star-outline.svg";
-
-    saveToStorage();
     applyFilter();
   });
 
@@ -186,10 +190,12 @@ function renderCard(pokemon) {
     const item = typeList.querySelector(".type-chip").cloneNode(true);
     item.querySelector(".type-name").textContent = type.type.name;
     const primaryType = pokemon.types.find((t) => t.slot === 1).type.name;
-    
+
     item.classList.add(`bg-type-${type.type.name.toLowerCase()}`);
     card.classList.add(`type-${primaryType.toLowerCase()}-gradient`);
-    card.querySelector(".card-comment").classList.add(`shadow-type-${primaryType.toLowerCase()}`);
+    card
+      .querySelector(".card-comment")
+      .classList.add(`shadow-type-${primaryType.toLowerCase()}`);
 
     return item;
   });
@@ -231,11 +237,10 @@ function renderCard(pokemon) {
   card.dataset.hasNote = String(Boolean(pokemon.comment?.trim()));
 
   const favoriteBtn = card.querySelector(".pokemon-favorite");
-  favoriteBtn.setAttribute("aria-pressed", String(Boolean(pokemon.favorite)));
-  favoriteBtn.querySelector("img").src = pokemon.favorite
-    ? "./icons/icon-star-filled.svg"
-    : "./icons/icon-star-outline.svg";
-  card.dataset.favorite = String(Boolean(pokemon.favorite));
+  const isFav = isFavorite(pokemon.id);
+  favoriteBtn.setAttribute("aria-pressed", String(isFav));
+  setStarIcon(favoriteBtn.querySelector("img"), isFav);
+  card.dataset.favorite = String(isFav);
 
   setupCardControls(card, pokemon);
 
@@ -249,5 +254,3 @@ myPokemonsList.append(fragment);
 
 updateCounters();
 applyFilter();
-
-
