@@ -288,6 +288,20 @@
         <!-- Card-Temp -->
       </ul>
 
+      <!-- Empty-state -->
+      <div
+        id="empty-state"
+        hidden
+        class="min-h-65 flex flex-col items-center justify-start pt-6 px-4 text-center text-text-primary/60 bg-[url(./images/image-empty.png)] bg-no-repeat bg-center bg-cover bg-white/30 bg-blend-multiply"
+      >
+        <p
+          id="empty-state-text"
+          class="text-sm sm:text-base font-semibold max-w-xs"
+        >
+          Noch keine Pokémon gefangen.
+        </p>
+      </div>
+
       <!-- Toast -->
       <div id="catch-toast">
         <span id="toast-message"></span>
@@ -331,7 +345,7 @@
           </button>
         </div>
 
-        <img class="pokemon-img  w-60  md:w-full h-auto" alt="" />
+        <img class="pokemon-img w-60 md:w-full h-auto" alt="" />
 
         <h2
           class="pokemon-name text-lg sm:text-xl md:text-2xl font-bold text-text-accent"

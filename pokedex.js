@@ -13,6 +13,21 @@ const STATS = [
   { key: "speed", label: "INIT", title: "Initiative" },
 ];
 
+const EMPTY_MESSAGES = {
+  all: "Noch keine Pokémon gefangen.",
+  notes: "Keine Pokémon mit Notizen gefunden.",
+  favs: "Noch keine Favoriten markiert.",
+};
+
+function updateEmptyState(visibleCount) {
+  const emptyState = document.getElementById("empty-state");
+  const emptyStateText = document.getElementById("empty-state-text");
+  if (!emptyState || !emptyStateText) return;
+
+  emptyState.hidden = visibleCount !== 0;
+  emptyStateText.textContent = EMPTY_MESSAGES[currentFilter];
+}
+
 const myPokemons = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
 // "all" | "notes" | "favs"
@@ -49,7 +64,8 @@ function updateCounters() {
 
 function applyFilter() {
   const cards = myPokemonsList.querySelectorAll(".card");
-
+    let visibleCount = 0;
+    
   cards.forEach((card) => {
     let visible = true;
 
@@ -59,8 +75,10 @@ function applyFilter() {
       visible = card.dataset.favorite === "true";
     }
 
-    card.hidden = !visible;
+      card.hidden = !visible;
+        if (visible) visibleCount += 1;
   });
+      updateEmptyState(visibleCount);
 }
 
 const ACTIVE_TAB_CLASSES = ["bg-accent", "text-text-secondary", "shadow-sm"];
@@ -231,3 +249,5 @@ myPokemonsList.append(fragment);
 
 updateCounters();
 applyFilter();
+
+
