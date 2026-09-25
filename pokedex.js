@@ -24,9 +24,11 @@ function renderCard(pokemon) {
 
   const pokNumber = pokemon.id;
   const pokName = pokemon.name;
-  const pokImg = pokemon.sprites.other["official-artwork"].front_default;
-  const pokBaseIndex = pokemon.stats.reduce((sum, s) => sum + s.base_stat, 0);
-  const pokTypes = pokemon.types.map((type) => type.type.name);
+  const pokImg = pokemon.sprite;
+    const pokBaseIndex = pokemon.stats.reduce((sum, s) => sum + s.base_stat, 0);
+    
+    
+//   const pokTypes = pokemon.types.map((type) => type.type.name);
 
   // console.log(pokBaseIndex);
     // console.log(getStat)
@@ -38,13 +40,16 @@ function renderCard(pokemon) {
 
   card.querySelector(".pokemon-number").textContent = `#${pokNumber}`;
   card.querySelector(".pokemon-name").textContent = pokName.toUpperCase();
-  card.querySelector(".pokemon-img").src = pokImg;
+    card.querySelector(".pokemon-img").src = pokImg;
+    
+    
 
   const typeList = card.querySelector(".type-list");
   ///
   const pokType = pokemon.types.map((type) => {
     const item = typeList.querySelector(".type-chip").cloneNode(true);
-    item.querySelector(".type-name").textContent = type.type.name;
+      item.querySelector(".type-name").textContent = type.type.name;
+      
     const primaryType = pokemon.types.find((t) => t.slot === 1).type.name;
 
     item.classList.add(`bg-type-${type.type.name.toLowerCase()}`);
@@ -55,8 +60,8 @@ function renderCard(pokemon) {
   ////
   typeList.replaceChildren(...pokType);
 
-    
   card.querySelector(".base-total").textContent = pokBaseIndex;
+    
 
   function getStatColorClass(value) {
     if (value < 50) return "bg-stat-low";
