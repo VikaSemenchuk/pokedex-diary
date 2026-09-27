@@ -67,7 +67,6 @@ function updateCounters() {
     }`;
   }
 
- 
   updateCatchCounter();
 }
 
@@ -90,8 +89,8 @@ function applyFilter() {
   updateEmptyState(visibleCount);
 }
 
-const ACTIVE_TAB_CLASSES = ["bg-accent", "text-text-secondary", "shadow-sm"];
-const INACTIVE_TAB_CLASSES = ["text-text-primary", "hover:bg-bg-secondary"];
+const ACTIVE_TAB_CLASS = "filter-tab-active";
+const INACTIVE_TAB_CLASS = "filter-tab-inactive";
 
 function setActiveTab(activeButton) {
   const allTabs = document.querySelectorAll("#filter-tabs button[data-filter]");
@@ -99,8 +98,8 @@ function setActiveTab(activeButton) {
   allTabs.forEach((btn) => {
     const isActive = btn === activeButton;
 
-    ACTIVE_TAB_CLASSES.forEach((cls) => btn.classList.toggle(cls, isActive));
-    INACTIVE_TAB_CLASSES.forEach((cls) => btn.classList.toggle(cls, !isActive));
+    btn.classList.toggle(ACTIVE_TAB_CLASS, isActive);
+    btn.classList.toggle(INACTIVE_TAB_CLASS, !isActive);
   });
 }
 
@@ -115,13 +114,16 @@ filterTabs.addEventListener("click", (event) => {
   applyFilter();
 });
 
+const COMMENT_VIEW_CLASS = "comment-field-view";
+const COMMENT_EDIT_CLASS = "comment-field-edit";
+
 function setupCardControls(card, pokemon) {
   const favoriteBtn = card.querySelector(".pokemon-favorite");
   const updateBtn = card.querySelector(".btn-update");
   const deleteBtn = card.querySelector(".btn-delete");
   const saveBtn = card.querySelector(".btn-save");
-  const form = card.querySelector(".card-comment");
-  const textarea = form.querySelector('textarea[name="comment"]');
+  const commentBox = card.querySelector(".card-comment");
+  const textarea = commentBox.querySelector('textarea[name="comment"]');
 
   favoriteBtn.addEventListener("click", () => {
     const isFav = toggleFavorite(pokemon.id);
@@ -133,26 +135,88 @@ function setupCardControls(card, pokemon) {
     applyFilter();
   });
 
-  updateBtn.addEventListener("click", () => {
-    textarea.readOnly = false;
-    textarea.focus();
+  function isEditing() {
+    return card.classList.contains("is-editing");
+  }
 
-    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+  function enterEditMode() {
+    if (isEditing()) return;
+
+    card.classList.add("is-editing");
+
+    textarea.readOnly = false;
+    textarea.classList.remove(COMMENT_VIEW_CLASS);
+    textarea.classList.add(COMMENT_EDIT_CLASS);
 
     saveBtn.hidden = false;
-  });
+    deleteBtn.hidden = true;
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    updateBtn.classList.add("rotate-45", "bg-accent/10");
+    updateBtn.setAttribute("aria-label", "Bearbeiten abbrechen");
+    updateBtn.title = "Bearbeiten abbrechen";
 
-    pokemon.comment = textarea.value.trim();
-    card.dataset.hasNote = String(pokemon.comment !== "");
-    saveToStorage();
+    textarea.focus();
+    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+  }
 
-    applyFilter();
+  function exitEditMode() {
+    card.classList.remove("is-editing");
 
     textarea.readOnly = true;
+    textarea.classList.remove(COMMENT_EDIT_CLASS);
+    textarea.classList.add(COMMENT_VIEW_CLASS);
+
     saveBtn.hidden = true;
+    deleteBtn.hidden = false;
+
+    updateBtn.classList.remove("rotate-45", "bg-accent/10");
+    updateBtn.setAttribute("aria-label", "Notiz bearbeiten");
+    updateBtn.title = "Notiz bearbeiten";
+  }
+
+  function saveComment() {
+    pokemon.comment = textarea.value.trim();
+    textarea.value = pokemon.comment;
+    card.dataset.hasNote = String(pokemon.comment !== "");
+    saveToStorage();
+    applyFilter();
+    exitEditMode();
+  }
+
+  function cancelEdit() {
+    textarea.value = pokemon.comment ?? "";
+    exitEditMode();
+  }
+
+  textarea.addEventListener("focus", enterEditMode);
+
+  updateBtn.addEventListener("click", () => {
+    if (isEditing()) {
+      cancelEdit();
+    } else {
+      enterEditMode();
+    }
+  });
+
+  saveBtn.addEventListener("click", saveComment);
+
+  textarea.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      cancelEdit();
+      textarea.blur();
+    }
+  });
+
+  commentBox.addEventListener("focusout", (event) => {
+    if (!isEditing()) return;
+
+    const next = event.relatedTarget;
+    const staysInternal =
+      next &&
+      (commentBox.contains(next) || next === saveBtn || next === updateBtn);
+
+    if (!staysInternal) saveComment();
   });
 
   deleteBtn.addEventListener("click", () => {
@@ -232,8 +296,9 @@ function renderCard(pokemon) {
 
   statsGrid.replaceChildren(...statItems);
 
-  const textarea = card.querySelector('textarea[name="comment"]');
-  textarea.value = pokemon.comment ?? "";
+  const commentBox = card.querySelector(".card-comment");
+  commentBox.querySelector('textarea[name="comment"]').value =
+    pokemon.comment ?? "";
   card.dataset.hasNote = String(Boolean(pokemon.comment?.trim()));
 
   const favoriteBtn = card.querySelector(".pokemon-favorite");

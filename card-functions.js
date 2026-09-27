@@ -4,7 +4,6 @@ const FAVORITES_KEY = "pokedex-favorites";
 const ICON_STAR_OUTLINE = "./icons/icon-star-outline.svg";
 const ICON_STAR_FILLED = "./icons/icon-star-filled.svg";
 
-
 export function getCaughtCount() {
   const pokedex = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   return pokedex.length;
@@ -51,7 +50,7 @@ export function toggleFavorite(pokemonId) {
 
   saveFavoriteIds(ids);
 
-  return index === -1; 
+  return index === -1;
 }
 
 export function setStarIcon(imgEl, isFav) {
