@@ -83,6 +83,20 @@
         @apply text-[11px] sm:text-xs font-bold tracking-wider;
       }
 
+      @utility comment-field-view {
+        @apply cursor-pointer bg-bg-secondary/30 hover:bg-bg-secondary/50;
+      }
+      @utility comment-field-edit {
+        @apply cursor-text bg-bg-secondary/50 ring-2 ring-accent/50;
+      }
+
+      @utility filter-tab-active {
+        @apply bg-accent text-text-secondary shadow-sm;
+      }
+      @utility filter-tab-inactive {
+        @apply text-text-primary hover:bg-bg-secondary;
+      }
+
       .type-normal-gradient {
         background: linear-gradient(to bottom left, #e7e5e4, #ffffff 50%);
       }
@@ -137,6 +151,18 @@
       .type-fairy-gradient {
         background: linear-gradient(to bottom left, #ffe4e6, #ffffff 50%);
       }
+
+      .comment-input {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-accent) transparent;
+      }
+      .comment-input::-webkit-scrollbar {
+        width: 4px;
+      }
+      .comment-input::-webkit-scrollbar-thumb {
+        background-color: var(--color-accent);
+        border-radius: 999px;
+      }
     </style>
   </head>
 
@@ -146,7 +172,7 @@
       <div
         class="flex flex-wrap items-center justify-between gap-4 bg-bg-card p-4 rounded-3xl shadow-sm"
       >
-            <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3">
           <img src="icons/icon-logo.svg" alt="logo" class="w-12 h-12" />
           <div>
             <h2 class="font-title text-xl font-bold text-text-accent">
@@ -160,7 +186,6 @@
             </span>
           </div>
         </div>
-    
 
         <!-- Navigation -->
         <nav
@@ -263,28 +288,28 @@
       >
         <button
           data-filter="all"
-          class="bg-accent text-text-secondary px-6 py-2.5 rounded-full font-bold transition shadow-sm cursor-pointer whitespace-nowrap"
+          class="filter-tab-active px-6 py-2.5 rounded-full font-bold transition cursor-pointer whitespace-nowrap"
         >
           Alle gefangenen
         </button>
         <button
           data-filter="notes"
-          class="text-text-primary px-6 py-2.5 rounded-full font-bold hover:bg-bg-secondary transition cursor-pointer whitespace-nowrap"
+          class="filter-tab-inactive px-6 py-2.5 rounded-full font-bold transition cursor-pointer whitespace-nowrap"
         >
           Mit Notizen
         </button>
         <button
           data-filter="favs"
-          class="text-text-primary px-6 py-2.5 rounded-full font-bold hover:bg-bg-secondary transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+          class="filter-tab-inactive px-6 py-2.5 rounded-full font-bold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
         >
-          Favoriten <span>⭐</span>
+          Favoriten
         </button>
       </div>
 
       <!-- Tagebuch-Liste: Karten werden per JS aus localStorage gerendert -->
       <ul
         id="pokedex-list"
-        class="flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6 px-4"
+        class="grid px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
       >
         <!-- Card-Temp -->
       </ul>
@@ -293,7 +318,7 @@
       <div
         id="empty-state"
         hidden
-        class="min-h-65 flex flex-col items-center justify-start pt-6 px-4 text-center text-text-primary/60 bg-[url(./images/image-empty.png)] bg-no-repeat bg-center bg-cover bg-white/30 bg-blend-multiply"
+        class="min-h-65 flex flex-col items-center justify-start md:pb-100 px-4 text-center text-text-primary/60 bg-[url(./images/image-empty.png)] bg-no-repeat bg-center bg-cover bg-white/30 bg-blend-multiply"
       >
         <p
           id="empty-state-text"
@@ -327,7 +352,7 @@
     <!------------ CARD-TEMPLATE ------------->
     <template id="card-template">
       <li
-        class="card flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 w-full md:w-xs lg:w-72 xl:w-80 border-0 shadow-lg rounded-2xl"
+        class="card flex flex-col items-center gap-3 p-3 sm:p-4 w-full border-0 shadow-lg rounded-2xl"
       >
         <div class="img-wrapper w-full flex items-center justify-between">
           <span
@@ -393,10 +418,10 @@
           </ul>
         </section>
 
-        <form
+        <div
           class="card-comment group flex flex-col w-full gap-1.5 sm:gap-2 border-b-0 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.3)] rounded-2xl p-3 mt-1"
         >
-          <div class="flex items-center gap-1.5">
+          <div class="flex justify-between items-center gap-1.5">
             <label
               class="flex flex-row items-center gap-2 text-xs sm:text-sm font-bold uppercase text-text-accent"
             >
@@ -408,12 +433,12 @@
 
             <button
               type="button"
-              class="btn-update ml-auto p-1.5 rounded-full bg-bg-secondary opacity-60 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+              class="btn-update p-1.5 rounded-full bg-bg-secondary opacity-60 group-hover:opacity-100 hover:opacity-100 focus-visible:opacity-100 transition-all"
               aria-label="Notiz bearbeiten"
               title="Notiz bearbeiten"
             >
               <img
-                class="w-3.5 h-3.5"
+                class="btn-update-icon w-3.5 h-3.5 transition-transform"
                 src="./icons/icon-edit-pencil.svg"
                 alt=""
               />
@@ -421,16 +446,18 @@
           </div>
 
           <textarea
-            class="text-sm w-full rounded-lg bg-bg-secondary/50 border-0 p-3 resize-none italic text-text-primary placeholder:text-text-primary/50"
+            class="comment-input comment-field-view text-sm w-full rounded-lg border-0 p-3 resize-none italic text-text-primary placeholder:text-text-primary/50 overflow-y-auto transition-colors"
             name="comment"
             rows="2"
             readonly
             placeholder="Hier ein Kommentar schreiben..."
           ></textarea>
+        </div>
 
+        <div class="action-slot w-full mt-1">
           <button
-            type="submit"
-            class="btn-save w-full flex items-center justify-center gap-1.5 text-text-primary bg-green-200"
+            type="button"
+            class="btn-save w-full flex items-center justify-center gap-1.5 text-text-primary bg-green-200 hover:bg-green-300 focus-visible:bg-green-300 transition-colors"
             hidden
           >
             <img
@@ -440,19 +467,19 @@
             />
             Speichern
           </button>
-        </form>
 
-        <button
-          type="button"
-          class="btn-delete w-full mt-1 justify-center  gap-2 md:gap-0.5 flex flex-row text-center text-accent/70 border border-btn-delete bg-transparent hover:bg-btn-delete/30 hover:text-accent focus-visible:bg-btn-delete/30 transition-colors"
-        >
-          <img
-            class="w-4 h-4 sm:w-5 sm:h-5"
-            src="./icons/icon-delete-trash.svg"
-            alt=""
-          />
-          Pokémon aus dem Pokédex löschen
-        </button>
+          <button
+            type="button"
+            class="btn-delete w-full justify-center gap-2 md:gap-0.5 flex flex-row text-center text-accent/70 border border-btn-delete bg-transparent hover:bg-btn-delete/30 hover:text-accent focus-visible:bg-btn-delete/30 transition-colors"
+          >
+            <img
+              class="w-4 h-4 sm:w-5 sm:h-5"
+              src="./icons/icon-delete-trash.svg"
+              alt=""
+            />
+            Pokémon aus dem Pokédex löschen
+          </button>
+        </div>
       </li>
     </template>
 
