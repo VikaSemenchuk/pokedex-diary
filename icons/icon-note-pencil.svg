@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-note-pencil" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g>
+    <!-- Three horizontal lines; bottom line is half-length (cut on the right) -->
+    <line x1="4" y1="6" x2="14" y2="6" stroke-width="2"></line>
+    <line x1="4" y1="10" x2="14" y2="10" stroke-width="2"></line>
+    <line x1="4" y1="14" x2="10" y2="14" stroke-width="2"></line>
+
+    <!-- Pencil: nudged further left/down to visually balance the icon -->
+    <g transform="translate(7.5 9) scale(0.6)">
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>

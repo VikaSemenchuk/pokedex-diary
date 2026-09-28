@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Mein Pokédex - Pokédex Tagebuch</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <style type="text/tailwindcss">
+      @theme {
+        --font-primary: "Plus Jakarta Sans", system-ui, sans-serif;
+        --font-title: "Space Grotesk", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        --color-bg-main: #faf8ff;
+        --color-bg-card: #ffffff;
+        --color-bg-secondary: #eef2ff;
+
+        --color-accent: #ee3e33;
+        --color-text-accent: #1e293b;
+        --color-text-primary: #5c403c;
+        --color-text-secondary: #ffffff;
+
+        --color-btn-blue: #e0e7ff;
+        --color-btn-yellow: #fef3c7;
+        --color-btn-delete: #fecaca;
+
+        --color-stat-low: #ba1a1a;
+        --color-stat-medium: #f2c000;
+        --color-stat-high: #10b981;
+
+        --color-type-normal: #e7e5e4;
+        --color-type-fire: #fed7aa;
+        --color-type-water: #bfdbfe;
+        --color-type-electric: #fde68a;
+        --color-type-grass: #a7f3d0;
+        --color-type-ice: #a5f3fc;
+        --color-type-fighting: #fca5a5;
+        --color-type-poison: #e9d5ff;
+        --color-type-ground: #fde68a;
+        --color-type-flying: #c7d2fe;
+        --color-type-psychic: #fbcfe8;
+        --color-type-bug: #d9f99d;
+        --color-type-rock: #fef08a;
+        --color-type-ghost: #ddd6fe;
+        --color-type-dragon: #c7d2fe;
+        --color-type-dark: #e4e4e7;
+        --color-type-steel: #cbd5e1;
+        --color-type-fairy: #ffe4e6;
+      }
+      @layer base {
+        html {
+          @apply text-xs sm:text-sm lg:text-base leading-relaxed;
+        }
+        body {
+          @apply container mx-auto antialiased font-primary bg-bg-main text-text-primary;
+        }
+        h1 {
+          @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-accent;
+        }
+        h2 {
+          @apply text-lg md:text-xl lg:text-2xl font-bold text-text-accent;
+        }
+        button {
+          @apply text-xs sm:text-sm font-bold tracking-wide py-2.5 px-4 rounded-xl;
+        }
+      }
+      @utility pokemon-number {
+        @apply text-xs sm:text-sm font-mono font-bold;
+      }
+      @utility pokemon-details {
+        @apply text-[11px] sm:text-xs font-bold tracking-wider;
+      }
+
+      @utility comment-field-view {
+        @apply cursor-pointer bg-bg-secondary/30 hover:bg-bg-secondary/50;
+      }
+      @utility comment-field-edit {
+        @apply cursor-text bg-bg-secondary/50 ring-2 ring-accent/50;
+      }
+
+      @utility filter-tab-active {
+        @apply bg-accent text-text-secondary shadow-sm;
+      }
+      @utility filter-tab-inactive {
+        @apply text-text-primary hover:bg-bg-secondary;
+      }
+
+      .type-normal-gradient {
+        background: linear-gradient(to bottom left, #e7e5e4, #ffffff 50%);
+      }
+      .type-fire-gradient {
+        background: linear-gradient(to bottom left, #fed7aa, #ffffff 50%);
+      }
+      .type-water-gradient {
+        background: linear-gradient(to bottom left, #bfdbfe, #ffffff 50%);
+      }
+      .type-grass-gradient {
+        background: linear-gradient(to bottom left, #a7f3d0, #ffffff 50%);
+      }
+      .type-electric-gradient {
+        background: linear-gradient(to bottom left, #fde68a, #ffffff 50%);
+      }
+      .type-ice-gradient {
+        background: linear-gradient(to bottom left, #a5f3fc, #ffffff 50%);
+      }
+      .type-fighting-gradient {
+        background: linear-gradient(to bottom left, #fca5a5, #ffffff 50%);
+      }
+      .type-poison-gradient {
+        background: linear-gradient(to bottom left, #e9d5ff, #ffffff 50%);
+      }
+      .type-ground-gradient {
+        background: linear-gradient(to bottom left, #fde68a, #ffffff 50%);
+      }
+      .type-flying-gradient {
+        background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%);
+      }
+      .type-psychic-gradient {
+        background: linear-gradient(to bottom left, #fbcfe8, #ffffff 50%);
+      }
+      .type-bug-gradient {
+        background: linear-gradient(to bottom left, #d9f99d, #ffffff 50%);
+      }
+      .type-rock-gradient {
+        background: linear-gradient(to bottom left, #fef08a, #ffffff 50%);
+      }
+      .type-ghost-gradient {
+        background: linear-gradient(to bottom left, #ddd6fe, #ffffff 50%);
+      }
+      .type-dragon-gradient {
+        background: linear-gradient(to bottom left, #c7d2fe, #ffffff 50%);
+      }
+      .type-dark-gradient {
+        background: linear-gradient(to bottom left, #e4e4e7, #ffffff 50%);
+      }
+      .type-steel-gradient {
+        background: linear-gradient(to bottom left, #cbd5e1, #ffffff 50%);
+      }
+      .type-fairy-gradient {
+        background: linear-gradient(to bottom left, #ffe4e6, #ffffff 50%);
+      }
+
+      .comment-input {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-accent) transparent;
+      }
+      .comment-input::-webkit-scrollbar {
+        width: 4px;
+      }
+      .comment-input::-webkit-scrollbar-thumb {
+        background-color: var(--color-accent);
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="flex flex-col gap-4 mb-8 pt-2">
+      <div
+        class="flex flex-wrap items-center justify-between gap-4 bg-bg-card p-4 rounded-3xl shadow-sm"
+      >
+        <div class="flex items-center gap-3">
+          <img src="./icons/icon-logo.svg" alt="logo" class="w-12 h-12" />
+          <div>
+            <h2 class="font-title text-xl font-bold text-text-accent">
+              Pokédex Tagebuch
+            </h2>
+            <span
+              class="inline-flex items-center gap-1 text-[11px] font-bold text-text-primary bg-bg-secondary px-2.5 py-0.5 rounded-full mt-0.5"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> POKÉAPI
+              LIVE
+            </span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav
+          class="flex items-center bg-bg-secondary/70 p-1.5 rounded-full shadow-inner gap-2"
+        >
+          <a
+            href="index.html"
+            aria-label="Startseite"
+            title="Startseite"
+            class="flex items-center justify-center gap-2 text-text-primary p-3 md:px-5 md:py-2 rounded-full font-bold hover:bg-bg-card transition-all text-sm"
+          >
+            <svg class="w-4 h-4 shrink-0">
+              <use href="./icons/sprite.svg#icon-nav-compass"></use>
+            </svg>
+            <span class="hidden md:inline">Startseite</span>
+          </a>
+
+          <a
+            href="pokedex.html"
+            aria-label="Mein Pokédex"
+            title="Mein Pokédex"
+            class="flex items-center justify-center gap-2 bg-accent text-text-secondary p-3 md:px-5 md:py-2 rounded-full font-bold transition-all shadow-sm text-sm"
+          >
+            <svg class="w-4 h-4 shrink-0">
+              <use href="./icons/sprite.svg#icon-pokedex-journal"></use>
+            </svg>
+            <span class="hidden md:inline">Mein Pokédex</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex flex-col gap-8">
+      <!-- Seitentitel -->
+      <div class="flex flex-col gap-2 p-4">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <h1
+            class="font-title text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text-accent tracking-tight"
+          >
+            MEIN POKÉDEX-TAGEBUCH
+          </h1>
+        </div>
+        <p class="text-text-primary text-sm sm:text-base">
+          Synchronisierte Feldforschungsdaten, individuelle Kampfwerte und
+          persönliche Notizen des Trainers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 gap-4 px-3">
+        <div
+          class="bg-bg-card p-6 rounded-3xl shadow-sm flex items-center gap-5"
+        >
+          <div
+            class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center shrink-0"
+          >
+            <img src="icons/icon-check-circle.svg" alt="" class="w-8 h-8" />
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="text-xs font-bold text-text-primary uppercase tracking-wider"
+              >Gefangene Pokémone</span
+            >
+            <span
+              id="stat-caught-count"
+              class="font-title text-3xl sm:text-4xl font-extrabold text-text-accent mt-1"
+              >4</span
+            >
+            <span class="text-sm font-semibold text-text-primary"
+              >Einträge</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="bg-bg-card p-6 rounded-3xl shadow-sm flex items-center gap-5"
+        >
+          <div
+            class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center shrink-0"
+          >
+            <img src="icons/icon-edit-pencil.svg" alt="" class="w-8 h-8" />
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="text-xs font-bold text-text-primary uppercase tracking-wider"
+              >Notizen Erstellt</span
+            >
+            <span
+              id="stat-notes-count"
+              class="font-title text-2xl sm:text-3xl font-extrabold text-text-accent mt-1"
+              >3 Notizen</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter-Tabs -->
+      <div
+        id="filter-tabs"
+        class="flex items-center self-center md:self-start bg-bg-card p-2 rounded-full shadow-sm gap-2 max-w-fit overflow-x-auto"
+      >
+        <button
+          data-filter="all"
+          class="filter-tab-active px-6 py-2.5 rounded-full font-bold transition cursor-pointer whitespace-nowrap"
+        >
+          Alle gefangenen
+        </button>
+        <button
+          data-filter="notes"
+          class="filter-tab-inactive px-6 py-2.5 rounded-full font-bold transition cursor-pointer whitespace-nowrap"
+        >
+          Mit Notizen
+        </button>
+        <button
+          data-filter="favs"
+          class="filter-tab-inactive px-6 py-2.5 rounded-full font-bold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+        >
+          Favoriten
+        </button>
+      </div>
+
+      <ul
+        id="pokedex-list"
+        class="grid px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      >
+        <!-- Card-Temp -->
+      </ul>
+
+      <!-- Empty-state -->
+      <div
+        id="empty-state"
+        hidden
+        class="min-h-65 flex flex-col items-center justify-start md:pb-100 px-4 text-center text-text-primary/60 bg-[url(./images/image-empty.png)] bg-no-repeat bg-center bg-cover bg-white/30 bg-blend-multiply"
+      >
+        <p
+          id="empty-state-text"
+          class="text-sm sm:text-base font-semibold max-w-xs"
+        >
+          Noch keine Pokémon gefangen.
+        </p>
+      </div>
+
+      <!-- Toast -->
+      <div id="catch-toast">
+        <span id="toast-message"></span>
+      </div>
+    </main>
+
+    <footer
+      class="flex items-center justify-center md:justify-normal py-6 px-4 text-center border-t border-bg-secondary/50 mt-4"
+    >
+      <p class="text-xs text-text-primary/60">
+        © 2026
+        <a
+          href="https://pokeapi.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-accent hover:underline"
+          >PokéAPI</a
+        >. Alle Rechte vorbehalten.
+      </p>
+    </footer>
+
+    <!------------ CARD-TEMPLATE ------------->
+    <template id="card-template">
+      <li
+        class="card flex flex-col items-center gap-3 sm:gap-4 p-3 sm:p-4 w-full border-0 shadow-lg rounded-2xl"
+      >
+        <div class="img-wrapper w-full flex items-center justify-between">
+          <span
+            class="pokemon-number px-3 py-1 rounded-2xl bg-btn-blue text-text-accent"
+          ></span>
+          <button
+            type="button"
+            class="pokemon-favorite p-2 rounded-full bg-bg-secondary"
+            aria-pressed="false"
+          >
+            <img
+              class="w-4 h-4 sm:w-5 sm:h-5"
+              src="./icons/icon-star-outline.svg"
+              alt=""
+            />
+          </button>
+        </div>
+
+        <img class="pokemon-img w-60 md:w-full h-auto" alt="" />
+
+        <h2
+          class="pokemon-name text-lg sm:text-xl md:text-2xl font-bold text-text-accent"
+        ></h2>
+
+        <ul
+          class="type-list flex flex-wrap justify-center gap-1.5"
+          role="list"
+          aria-label="Typen"
+        >
+          <li
+            class="type-chip inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-text-accent text-xs font-bold uppercase"
+          >
+            <!-- <span class="type-dot w-2 h-2 rounded-full bg-text-primary;" aria-hidden="true"></span> -->
+            <span class="type-name"></span>
+          </li>
+        </ul>
+
+        <section class="card-stats flex flex-col w-full gap-2 mt-1">
+          <div class="stats-head flex justify-between items-center">
+            <h3 class="pokemon-details uppercase text-text-accent">
+              Statuswerte
+            </h3>
+            <p class="pokemon-details text-accent">
+              Basis-Index <span class="base-total"></span>
+            </p>
+          </div>
+
+          <ul class="stats-grid grid grid-cols-2 gap-x-8 gap-y-2" role="list">
+            <li class="stat-item flex flex-col gap-1">
+              <div
+                class="stat-label flex justify-between pokemon-details text-text-accent"
+              >
+                <abbr class="stat-name no-underline"></abbr>
+                <span class="stat-value"></span>
+              </div>
+              <div
+                class="stat-track w-full h-2 rounded-full bg-bg-secondary overflow-hidden"
+                aria-hidden="true"
+              >
+                <div class="stat-fill h-full rounded-full"></div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <div
+          class="card-comment group flex flex-col w-full gap-1.5 sm:gap-2 border-b-0 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.3)] rounded-2xl p-3 mt-1"
+        >
+          <div class="flex justify-between items-center gap-1.5">
+            <label
+              class="flex flex-row items-center gap-2 text-xs sm:text-sm font-bold uppercase text-text-accent"
+            >
+              <svg class="w-4 h-4 shrink-0">
+                <use href="./icons/sprite.svg#icon-trainer-badge"></use>
+              </svg>
+              Trainer-Tagebuch
+            </label>
+
+            <button
+              type="button"
+              class="btn-update p-1.5 rounded-full bg-bg-secondary opacity-60 group-hover:opacity-100 hover:opacity-100 focus-visible:opacity-100 transition-all"
+              aria-label="Notiz bearbeiten"
+              title="Notiz bearbeiten"
+            >
+              <img
+                class="btn-update-icon w-3.5 h-3.5 transition-transform"
+                src="./icons/icon-edit-pencil.svg"
+                alt=""
+              />
+            </button>
+          </div>
+
+          <textarea
+            class="comment-input comment-field-view text-sm w-full rounded-lg border-0 p-3 resize-none italic text-text-primary placeholder:text-text-primary/50 overflow-y-auto transition-colors"
+            name="comment"
+            rows="2"
+            readonly
+            placeholder="Hier ein Kommentar schreiben..."
+          ></textarea>
+        </div>
+
+        <div class="action-slot w-full mt-1">
+          <button
+            type="button"
+            class="btn-save w-full flex items-center justify-center gap-1.5 text-text-primary bg-green-200 hover:bg-green-300 focus-visible:bg-green-300 transition-colors"
+            hidden
+          >
+            <img
+              class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+              src="./icons/icon-save-disk.svg"
+              alt=""
+            />
+            Speichern
+          </button>
+
+          <button
+            type="button"
+            class="btn-delete w-full justify-center gap-2 md:gap-0.5 flex flex-row text-center text-accent/70 border border-btn-delete bg-transparent hover:bg-btn-delete/30 hover:text-accent focus-visible:bg-btn-delete/30 transition-colors"
+          >
+            <img
+              class="w-4 h-4 sm:w-5 sm:h-5"
+              src="./icons/icon-delete-trash.svg"
+              alt=""
+            />
+            Pokémon aus dem Pokédex löschen
+          </button>
+        </div>
+      </li>
+    </template>
+
+    <!-- Oben-button -->
+    <button
+      id="backToTopBtn"
+      aria-label="Oben"
+      class="fixed right-6 z-50 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-amber-300 text-white shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4 pointer-events-none hover:bg-amber-400 active:scale-95 focus:outline-none"
+      style="bottom: max(1.5rem, env(safe-area-inset-bottom))"
+    >
+      <svg
+        class="h-6 w-6 sm:h-7 sm:w-7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 15l7-7 7 7"
+        ></path>
+      </svg>
+    </button>
+
+    <script type="module" src="pokedex.js"></script>
+  </body>
+</html>
