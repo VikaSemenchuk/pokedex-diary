@@ -6,17 +6,22 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
+    <title>Mein Pokédex - Pokédex Tagebuch</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <title>Mein Pokédex - Pokédex Tagebuch</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <style type="text/tailwindcss">
       @theme {
         --font-primary: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -306,7 +311,6 @@
         </button>
       </div>
 
-      <!-- Tagebuch-Liste: Karten werden per JS aus localStorage gerendert -->
       <ul
         id="pokedex-list"
         class="grid px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
@@ -352,7 +356,7 @@
     <!------------ CARD-TEMPLATE ------------->
     <template id="card-template">
       <li
-        class="card flex flex-col items-center gap-3 p-3 sm:p-4 w-full border-0 shadow-lg rounded-2xl"
+        class="card flex flex-col items-center gap-3 sm:gap-4 p-3 sm:p-4 w-full border-0 shadow-lg rounded-2xl"
       >
         <div class="img-wrapper w-full flex items-center justify-between">
           <span
